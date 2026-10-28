@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Puskesmas Wori — Integrasi Layanan Primer (ILP) | Melayani dengan Cinta</title>
+  <meta name="description" content="Portal Resmi Informasi Layanan Kesehatan Puskesmas Wori, Kecamatan Wori, Kabupaten Minahasa Utara. Transformasi Integrasi Layanan Primer (ILP) berbasis siklus hidup." />
+  <link rel="icon" type="image/png" href="logo-puskesmas-wori.png?v=2" />
+
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+            body: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            gemini: {
+              bg: '#f8fafd',
+              surface: '#ffffff',
+              subtle: '#f0f4f9',
+              border: '#e2e8f0',
+              blue: '#1a73e8',
+              cyan: '#00acc1',
+              teal: '#0d9488',
+            }
+          },
+          boxShadow: {
+            'soft': '0 4px 24px -4px rgba(15, 23, 42, 0.05), 0 2px 8px -2px rgba(15, 23, 42, 0.03)',
+            'soft-lg': '0 12px 36px -6px rgba(14, 116, 144, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons via CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <style>
+    /* Background Gedung Puskesmas Wori untuk Mode Siang & Malam */
+    .gemini-mesh {
+      background-image: 
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.35)),
+        url('bg-puskesmas-wori.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .dark .gemini-mesh {
+      background-image: 
+        linear-gradient(to bottom, rgba(2, 6, 23, 0.55), rgba(15, 23, 42, 0.68)),
+        url('bg-puskesmas-wori.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .hero-text-halo {
+      text-shadow: 0 2px 16px rgba(255, 255, 255, 0.95), 0 0 6px rgba(255, 255, 255, 0.9);
+    }
+    .dark .hero-text-halo {
+      text-shadow: 0 2px 16px rgba(0, 0, 0, 0.9), 0 0 6px rgba(0, 0, 0, 0.85);
+    }
+    .gemini-gradient-text {
+      background: linear-gradient(90deg, #7E62F6 0%, #3E80F6 42%, #AF5CB9 78%, #E14B9A 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: none;
+    }
+    .dark .gemini-gradient-text {
+      background: linear-gradient(90deg, #8B73FF 0%, #5294FF 42%, #C46ECF 78%, #F062AD 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: none;
+    }
+    .gemini-gradient-bg {
+      background: linear-gradient(135deg, #2563eb 0%, #0891b2 50%, #0d9488 100%);
+    }
+    .logo-crisp {
+      filter: contrast(1.08) saturate(1.1) drop-shadow(0 4px 10px rgba(15, 23, 42, 0.12));
+      image-rendering: -webkit-optimize-contrast;
+    }
+    /* Slide Horizontal Animation */
+    .slide-enter-right {
+      animation: slideFromRight 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .slide-enter-left {
+      animation: slideFromLeft 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes slideFromRight {
+      from {
+        opacity: 0;
+        transform: translateX(48px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    @keyframes slideFromLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-48px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#f8fafd] dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-cyan-100 selection:text-cyan-900 transition-colors duration-300 select-none sm:select-auto">
+
+  <!-- 1. HEADER & NAVIGASI -->
+  <header class="sticky top-0 shrink-0 z-40 bg-[#f8fafd]/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-slate-200/70 dark:border-slate-800 transition-colors duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 sm:h-24 flex items-center justify-between gap-3">
+      
+      <!-- Brand / Identity -->
+      <button onclick="switchPage('beranda')" class="flex items-center gap-3 sm:gap-4 group text-left focus:outline-none">
+        <img src="logo-puskesmas-wori.png?v=2" alt="Logo Puskesmas Wori" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-contain logo-crisp group-hover:scale-105 transition-transform shrink-0" />
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="uppercase font-extrabold text-lg sm:text-2xl tracking-tight gemini-gradient-text">PUSKESMAS WORI</span>
+            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-teal-50 dark:bg-teal-950/80 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
+              ILP
+            </span>
+          </div>
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-semibold">Kabupaten Minahasa Utara</p>
+        </div>
+      </button>
+
+      <!-- Right Controls: Mode Siang/Malam + UGD 24 Jam + Menu -->
+      <div class="flex items-center gap-2">
+        
+        <!-- Mode Siang / Malam Toggle Button -->
+        <button onclick="toggleTheme()" id="themeToggleBtn" aria-label="Ganti Mode Siang atau Malam" title="Mode Siang / Malam" class="inline-flex items-center gap-1.5 px-3 py-2.5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-amber-300 hover:bg-slate-100 dark:hover:bg-slate-700 shadow-sm transition text-xs font-bold">
+          <i data-lucide="moon" id="themeIconDark" class="w-4 h-4"></i>
+          <i data-lucide="sun" id="themeIconLight" class="w-4 h-4 hidden"></i>
+          <span id="themeLabel" class="hidden md:inline">Malam</span>
+        </button>
+
+        <!-- Prominent Emergency / Contact CTA -->
+        <button onclick="openEmergencyModal()" class="relative inline-flex items-center gap-2 px-3.5 sm:px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-rose-600 via-red-500 to-orange-500 hover:from-rose-700 hover:to-red-600 shadow-md shadow-rose-500/25 hover:shadow-lg transition-all active:scale-95">
+          <span class="relative flex h-2.5 w-2.5 shrink-0">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+          </span>
+          <i data-lucide="phone-call" class="w-4 h-4 shrink-0"></i>
+          <span class="leading-tight text-left sm:text-center">UGD 24 Jam / Kontak</span>
+        </button>
+
+        <!-- Menu Sidebar Button (Always on Right) -->
+        <button id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Buka Menu Navigasi" title="Menu Navigasi" class="p-2.5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition shadow-sm">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- WORKSPACE WRAPPER: MAIN CONTENT (LEFT) + VERTICAL MENU SIDEBAR (RIGHT) -->
+  <div class="flex-1 flex flex-row gemini-mesh overflow-x-hidden relative">
+
+    <!-- MAIN CONTAINER -->
+    <main id="mainTouchArea" class="flex-1 min-w-0 flex flex-col relative px-4 sm:px-6 lg:px-8 py-5 sm:py-8">
+
+    <!-- ==========================================
+         VIEW 1: BERANDA
+         ========================================== -->
+    <section id="view-beranda" class="w-full max-w-5xl mx-auto my-auto text-center">
+      <!-- Main Title -->
+      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+        <span class="hero-text-halo">Layanan Kesehatan Terpadu</span> <br class="hidden sm:inline" />
+        <span class="gemini-gradient-text inline-block">Setiap Siklus Kehidupan Anda</span>
+      </h1>
+
+      <!-- Subtitle Paragraph -->
+      <p class="hero-text-halo mt-4 sm:mt-5 text-sm sm:text-lg text-slate-900 dark:text-slate-100 max-w-2xl mx-auto leading-relaxed font-body font-semibold">
+        Selamat datang di portal informasi <strong>Puskesmas Wori</strong>. Melalui program <strong>Integrasi Layanan Primer (ILP)</strong>, pelayanan kini ditata berdasarkan klaster siklus hidup—mulai dari ibu hamil, bayi, remaja, usia dewasa, hingga lansia di seluruh wilayah kerja Kecamatan Wori.
+      </p>
+       
+      <!-- 3 Key Interactive Badges -->
+      <div class="mt-7 sm:mt-9 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+        <button onclick="switchPage('klaster-ilp')" class=" flex items-center gap-3 bg-white/95 dark:bg-slate-900/95 px-5 py-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-soft hover:border-blue-400 dark:hover:border-blue-500 hover:-translate-y-0.5 transition text-left">
+          <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+            <i data-lucide="layers" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Sistem Pelayanan</p>
+            <p class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100">4 Klaster + Lintas Klaster</p>
+          </div>
+        </button>
+
+        <button onclick="switchPage('jejaring-wori')" class="flex items-center gap-3 bg-white/95 dark:bg-slate-900/95 px-5 py-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-soft hover:border-teal-400 dark:hover:border-teal-500 hover:-translate-y-0.5 transition text-left">
+          <div class="w-9 h-9 rounded-xl bg-teal-50 dark:bg-teal-950/80 text-teal-600 dark:text-teal-400 flex items-center justify-center shrink-0">
+            <i data-lucide="compass" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Cakupan Wilayah Kerja</p>
+            <p class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100">13 Desa Kecamatan Wori</p>
+          </div>
+        </button>
+
+        <button onclick="switchPage('cek-usia')" class="flex items-center gap-3 bg-white/95 dark:bg-slate-900/95 px-5 py-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-soft hover:border-cyan-400 dark:hover:border-cyan-500 hover:-translate-y-0.5 transition text-left">
+          <div class="w-9 h-9 rounded-xl bg-cyan-50 dark:bg-cyan-950/80 text-cyan-600 dark:text-cyan-400 flex items-center justify-center shrink-0">
+            <i data-lucide="shield-check" class="w-4 h-4"></i>
+          </div>
+          <div>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Skrining Kesehatan</p>
+            <p class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100">Gratis Bagi Peserta JKN/KTP</p>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         UNIVERSAL HORIZONTAL SLIDER VIEW (FOR ALL MENUS)
+         ========================================== -->
+    <section id="view-slider" class="hidden w-full max-w-5xl mx-auto my-auto flex flex-col">
+      
+      <!-- Top Bar: Back Button + Section Title + Slide Counter -->
+      <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
+        <button onclick="switchPage('beranda')" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-bold text-blue-600 dark:text-cyan-400 shadow-sm hover:bg-slate-50 transition">
+          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+          <span>Beranda</span>
+        </button>
+
+        <div class="flex items-center gap-2">
+          <span id="sliderCategoryBadge" class="hero-text-halo text-xs sm:text-sm font-extrabold text-slate-900 dark:text-slate-100"></span>
+          <span id="sliderCounter" class="px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/90 text-blue-700 dark:text-cyan-300 border border-blue-200 dark:border-blue-800 text-xs font-extrabold shadow-sm">
+            1 / 6
+          </span>
+        </div>
+      </div>
+
+      <!-- Horizontal Quick Indicator Pills (Scrollable Left-Right) -->
+      <div id="sliderPills" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-2 px-1 mb-1">
+        <!-- Populated dynamically -->
+      </div>
+
+      <!-- Main Slide Stage with Left & Right Arrow Buttons -->
+      <div class="relative flex items-center gap-2 sm:gap-4">
+        
+        <!-- TOMBOL GESER KIRI (PREV) -->
+        <button onclick="prevSlide()" aria-label="Geser ke Kiri" class="shrink-0 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500 dark:hover:border-cyan-400 hover:text-blue-600 dark:hover:text-cyan-400 shadow-soft flex items-center justify-center transition active:scale-90">
+          <i data-lucide="chevron-left" class="w-6 h-6 sm:w-7 sm:h-7"></i>
+        </button>
+
+        <!-- ACTIVE SLIDE CARD CONTAINER -->
+        <div id="slideCardViewport" class="flex-1 min-w-0">
+          <!-- Single Active Card Rendered Here -->
+        </div>
+
+        <!-- TOMBOL GESER KANAN (NEXT) -->
+        <button onclick="nextSlide()" aria-label="Geser ke Kanan" class="shrink-0 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500 dark:hover:border-cyan-400 hover:text-blue-600 dark:hover:text-cyan-400 shadow-soft flex items-center justify-center transition active:scale-90">
+          <i data-lucide="chevron-right" class="w-6 h-6 sm:w-7 sm:h-7"></i>
+        </button>
+
+      </div>
+
+      <!-- Bottom Swipe Hint & Prev/Next Labels -->
+      <div class="mt-3.5 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-2">
+        <button onclick="prevSlide()" class="inline-flex items-center gap-1 font-semibold hover:text-blue-600 dark:hover:text-cyan-400 transition">
+          <i data-lucide="move-left" class="w-3.5 h-3.5"></i>
+          <span id="prevSlideLabel">Sebelumnya</span>
+        </button>
+
+        <span class="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-medium bg-white/80 dark:bg-slate-900/80 px-3 py-1 rounded-full border border-slate-200/70 dark:border-slate-800">
+          <i data-lucide="move-horizontal" class="w-3.5 h-3.5 text-cyan-500"></i>
+          Geser layar ke kiri / kanan atau klik panah
+        </span>
+
+        <button onclick="nextSlide()" class="inline-flex items-center gap-1 font-semibold hover:text-blue-600 dark:hover:text-cyan-400 transition">
+          <span id="nextSlideLabel">Selanjutnya</span>
+          <i data-lucide="move-right" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+
+    </section>
+
+  </main>
+
+    <!-- VERTICAL NAVIGATION MENU AT RIGHT SIDE (DOES NOT OVERLAP MAIN CONTENT) -->
+    <aside id="mobileMenu" class="hidden w-60 sm:w-68 shrink-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-l border-slate-200/80 dark:border-slate-800 p-4 shadow-xl flex-col gap-2 z-30">
+      <div class="flex items-center justify-between pb-2.5 mb-1 border-b border-slate-100 dark:border-slate-800">
+        <span class="text-xs font-extrabold uppercase tracking-wider text-slate-400">Menu Navigasi</span>
+        <button onclick="toggleMobileMenu()" aria-label="Tutup Menu" class="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+
+      <button onclick="switchPage('beranda', false)" data-nav-mobile="beranda" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
+        <i data-lucide="home" class="w-4 h-4 text-blue-500 shrink-0"></i>
+        <span>Beranda</span>
+      </button>
+      <button onclick="switchPage('cek-usia', false)" data-nav-mobile="cek-usia" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
+        <i data-lucide="users" class="w-4 h-4 text-cyan-500 shrink-0"></i>
+        <span>Pilih Kelompok Usia</span>
+      </button>
+      <button onclick="switchPage('klaster-ilp', false)" data-nav-mobile="klaster-ilp" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
+        <i data-lucide="layers" class="w-4 h-4 text-teal-500 shrink-0"></i>
+        <span>Klaster ILP</span>
+      </button>
+      <button onclick="switchPage('alur-pelayanan', false)" data-nav-mobile="alur-pelayanan" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
+        <i data-lucide="git-branch" class="w-4 h-4 text-indigo-500 shrink-0"></i>
+        <span>Alur Pelayanan Pasien</span>
+      </button>
+      <button onclick="switchPage('jejaring-wori', false)" data-nav-mobile="jejaring-wori" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
+        <i data-lucide="map" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+        <span>Jejaring 13 Desa Wori</span>
+      </button>
+      <button onclick="switchPage('kontak-lokasi', false)" data-nav-mobile="kontak-lokasi" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
+        <i data-lucide="clock" class="w-4 h-4 text-rose-500 shrink-0"></i>
+        <span>Lokasi & Jam Pelayanan</span>
+      </button>
+    </aside>
+
+  </div>
+
+  <!-- MODAL 1: UGD 24 JAM & KONTAK DARURAT -->
+  <div id="emergencyModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-800 relative">
+      <button onclick="closeEmergencyModal()" aria-label="Tutup" class="absolute top-5 right-5 p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 text-xs font-bold mb-4">
+        <span class="w-2 h-2 rounded-full bg-rose-600 animate-ping"></span>
+        LAYANAN SIAGA 24 JAM
+      </div>
+
+      <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white">UGD 24 Jam & Persalinan Puskesmas Wori</h3>
+      <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">
+        Unit Gawat Darurat (UGD) dan Ruang Persalinan (PONED) Puskesmas Wori siap melayani kasus gawat darurat medis, kecelakaan, serta persalinan 24 jam penuh termasuk hari Minggu & Libur Nasional.
+      </p>
+
+      <div class="mt-6 space-y-3">
+        <a href="tel:119" class="flex items-center justify-between p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 hover:bg-rose-100 transition">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-xl bg-rose-600 text-white flex items-center justify-center">
+              <i data-lucide="phone-call" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <p class="text-xs font-bold uppercase text-rose-700 dark:text-rose-300">Panggilan Darurat Medis / PSC</p>
+              <p class="text-base font-extrabold text-slate-900 dark:text-white">119 / 0811-4300-911</p>
+            </div>
+          </div>
+          <span class="text-xs font-bold text-rose-700 bg-white px-3 py-1.5 rounded-xl border border-rose-200">Hubungi</span>
+        </a>
+
+        <a href="https://wa.me/6282190007654?text=Halo%20Petugas%20Puskesmas%20Wori,%20saya%20ingin%20menanyakan%20informasi%20layanan%20ILP" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-2xl bg-teal-50 dark:bg-teal-950/50 border border-teal-200 dark:border-teal-800 hover:bg-teal-100 transition">
+          <div class="flex items-center gap-3.5">
+            <div class="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center">
+              <i data-lucide="message-circle" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <p class="text-xs font-bold uppercase text-teal-700 dark:text-teal-300">WhatsApp Informasi & Pengaduan</p>
+              <p class="text-base font-extrabold text-slate-900 dark:text-white">0821-9000-7654</p>
+            </div>
+          </div>
+          <span class="text-xs font-bold text-teal-700 bg-white px-3 py-1.5 rounded-xl border border-teal-200">Chat WA</span>
+        </a>
+      </div>
+
+      <div class="mt-6 p-4 rounded-2xl bg-[#f8fafd] dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-600 dark:text-slate-300 space-y-1.5">
+        <p class="font-bold text-slate-800 dark:text-white">Persyaratan Dokumen Kunjungan:</p>
+        <p>• Pasien Gawat Darurat langsung ditangani <strong>tanpa harus antre loket</strong>.</p>
+        <p>• Mohon membawa KTP / Kartu Keluarga / Kartu BPJS Kesehatan / Buku KIA (bagi ibu hamil & balita).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: FORM PENGADUAN & SARAN MASYARAKAT -->
+  <div id="complaintModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-800 relative">
+      <button onclick="closeComplaintModal()" aria-label="Tutup" class="absolute top-5 right-5 p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-50 dark:bg-cyan-950 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800 text-xs font-bold mb-3">
+        Klaster 1 • Manajemen Mutu Pelayanan
+      </div>
+      <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">Kotak Saran & Pengaduan Pasien</h3>
+      <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-1">
+        Masukan Anda sangat berharga bagi peningkatan kualitas layanan Puskesmas Wori.
+      </p>
+
+      <form id="complaintForm" onsubmit="submitComplaint(event)" class="mt-5 space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nama Lengkap & Desa Asal</label>
+          <input type="text" id="compName" required placeholder="Contoh: Ibu Maria - Desa Tiwoho" class="w-full px-4 py-2.5 rounded-2xl bg-[#f8fafd] dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500" />
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Klaster / Unit Layanan Terkait</label>
+          <select id="compKlaster" class="w-full px-4 py-2.5 rounded-2xl bg-[#f8fafd] dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500">
+            <option value="Klaster 1 (Pendaftaran / Administrasi)">Klaster 1 (Pendaftaran / Administrasi)</option>
+            <option value="Klaster 2 (Ibu Hamil, Anak & Remaja)">Klaster 2 (Ibu Hamil, Anak & Remaja)</option>
+            <option value="Klaster 3 (Usia Dewasa & Lansia)">Klaster 3 (Usia Dewasa & Lansia)</option>
+            <option value="Klaster 4 (Penyakit Menular & Kesling)">Klaster 4 (Penyakit Menular & Kesling)</option>
+            <option value="Lintas Klaster (UGD / Lab / Farmasi / Pustu)">Lintas Klaster (UGD / Lab / Farmasi / Pustu)</option>
+          </select>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Pesan / Saran / Pengaduan</label>
+          <textarea id="compMessage" required rows="3" placeholder="Tuliskan pengalaman, pertanyaan, atau saran Anda..." class="w-full px-4 py-2.5 rounded-2xl bg-[#f8fafd] dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500"></textarea>
+        </div>
+        <button type="submit" class="w-full py-3 rounded-2xl gemini-gradient-bg text-white font-bold text-sm shadow-md hover:opacity-95 transition">
+          Kirim Masukan Sekarang
+        </button>
+      </form>
+
+      <div id="complaintSuccess" class="hidden mt-4 p-4 rounded-2xl bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200 text-xs sm:text-sm font-medium">
+        Terima kasih! Masukan Anda telah tercatat oleh Tim Mutu Klaster 1 Puskesmas Wori.
+      </div>
+    </div>
+  </div>
+
+  <!-- VANILLA JAVASCRIPT: HORIZONTAL SLIDE ENGINE FOR ALL MENUS -->
+  <script>
+    let currentSection = 'beranda';
+    let currentSlideIndex = 0;
+
+    // SEMUA DATA SLIDE UNTUK SETIAP MENU NAVIGASI
+    const menuSlidesData = {
+      // 1. MENU KELOMPOK USIA (Pertama muncul: Ibu Hamil & Nifas, geser kanan untuk Bayi & Balita, dst.)
+      'cek-usia': {
+        categoryTitle: 'Pilih Kelompok Usia',
+        items: [
+          {
+            shortLabel: '1. Ibu Hamil & Nifas',
+            badge: 'KELOMPOK USIA 1 • KLASTER 2',
+            icon: 'baby',
+            accent: 'from-pink-500 via-rose-500 to-amber-500',
+            title: 'Ibu Hamil, Bersalin & Nifas',
+            subtitle: 'Pendampingan kehamilan sehat dengan pemeriksaan terpadu agar Ibu dan Bayi selamat, sehat, serta bebas stunting.',
+            metaLeftLabel: 'Ruang Tujuan',
+            metaLeftValue: 'Ruang Klaster 2 (KIA & Persalinan)',
+            metaRightLabel: 'Dokumen Dibawa',
+            metaRightValue: 'Buku KIA (Pink), KTP/KK & BPJS',
+            pointsTitle: 'Paket Layanan & Skrining Gratis:',
+            points: [
+              'Pemeriksaan Kehamilan (ANC Terpadu) minimal 6 kali termasuk 2 kali USG oleh Dokter',
+              'Skrining Triple Eliminasi (HIV, Sifilis, Hepatitis B) & Cek Hemoglobin (Anemia)',
+              'Pemberian Tablet Tambah Darah (TTD) & Konseling Gizi Ibu Hamil',
+              'Pelayanan Persalinan Normal 24 Jam, Perawatan Nifas, Konseling ASI & KB Pasca Salin'
+            ]
+          },
+          {
+            shortLabel: '2. Bayi & Balita',
+            badge: 'KELOMPOK USIA 2 • KLASTER 2',
+            icon: 'smile',
+            accent: 'from-amber-500 via-orange-500 to-yellow-500',
+            title: 'Bayi & Balita (Usia 0 – 5 Tahun)',
+            subtitle: 'Pemantauan pertumbuhan dan perkembangan emas anak serta perlindungan penyakit melalui imunisasi lengkap.',
+            metaLeftLabel: 'Ruang Tujuan',
+            metaLeftValue: 'Ruang Klaster 2 (Imunisasi, Gizi & MTBS)',
+            metaRightLabel: 'Dokumen Dibawa',
+            metaRightValue: 'Buku KIA (Pink) & KIA/KK',
+            pointsTitle: 'Paket Layanan & Skrining Gratis:',
+            points: [
+              'Skrining Bayi Baru Lahir (Skrining Hipotiroid Kongenital / SHK)',
+              'Imunisasi Dasar & Baduta Rutin Lengkap (BCG, Polio, DPT-HB-Hib, Campak-Rubella, PCV, Rotavirus)',
+              'Pengukuran Berat Badan, Tinggi Badan, Lingkar Kepala & Deteksi Dini Stunting',
+              'Pelayanan MTBS (Manajemen Terpadu Balita Sakit) & Konseling MP-ASI'
+            ]
+          },
+          {
+            shortLabel: '3. Anak & Remaja',
+            badge: 'KELOMPOK USIA 3 • KLASTER 2',
+            icon: 'graduation-cap',
+            accent: 'from-indigo-500 via-blue-500 to-cyan-500',
+            title: 'Anak Pra-Sekolah & Remaja (6 – 17 Tahun)',
+            subtitle: 'Mendukung anak usia sekolah dan remaja Kecamatan Wori tumbuh sehat, bebas anemia, berprestasi, dan sehat mental.',
+            metaLeftLabel: 'Ruang Tujuan',
+            metaLeftValue: 'Ruang Klaster 2 (Layanan Remaja / PKPR)',
+            metaRightLabel: 'Dokumen Dibawa',
+            metaRightValue: 'Kartu Identitas Anak / Kartu Pelajar / KK',
+            pointsTitle: 'Paket Layanan & Skrining Gratis:',
+            points: [
+              'Skrining Anemia Remaja Putri (Cek Hb) & Pemberian Tablet Tambah Darah (TTD)',
+              'Pemeriksaan Kesehatan Berkala Anak Sekolah (Mata, Telinga, Kesehatan Gigi)',
+              'Skrining Kesehatan Jiwa (SDQ), Perilaku Merokok & Kebugaran Jasmani',
+              'Konseling Sebaya & Pelayanan Kesehatan Peduli Remaja (PKPR)'
+            ]
+          },
+          {
+            shortLabel: '4. Usia Produktif',
+            badge: 'KELOMPOK USIA 4 • KLASTER 3',
+            icon: 'briefcase',
+            accent: 'from-blue-600 via-cyan-500 to-teal-500',
+            title: 'Usia Produktif / Dewasa (18 – 59 Tahun)',
+            subtitle: 'Deteksi dini faktor risiko Penyakit Tidak Menular (PTM) agar warga usia kerja tetap produktif dan bugar.',
+            metaLeftLabel: 'Ruang Tujuan',
+            metaLeftValue: 'Ruang Klaster 3 (Usia Produktif)',
+            metaRightLabel: 'Dokumen Dibawa',
+            metaRightValue: 'KTP Elektronik & Kartu BPJS / JKN Mobile',
+            pointsTitle: 'Paket Layanan & Skrining Gratis:',
+            points: [
+              'Skrining Hipertensi (Cek Tekanan Darah) & Obesitas (Indeks Massa Tubuh & Lingkar Perut)',
+              'Pemeriksaan Gula Darah (Diabetes Melitus), Kolesterol & Asam Urat',
+              'Deteksi Dini Kanker Leher Rahim (Tes IVA) & Kanker Payudara (SADANIS) bagi Wanita Usia Subur',
+              'Skrining Kesehatan Jiwa, Layak Hamil bagi Calon Pengantin, dan Pelayanan KB'
+            ]
+          },
+          {
+            shortLabel: '5. Lanjut Usia (60+)',
+            badge: 'KELOMPOK USIA 5 • KLASTER 3',
+            icon: 'heart-handshake',
+            accent: 'from-teal-600 via-emerald-500 to-cyan-500',
+            title: 'Lanjut Usia / Lansia (60+ Tahun)',
+            subtitle: 'Pelayanan santun lanjut usia dengan pemantauan penyakit kronis untuk menjaga kemandirian dan kualitas hidup lansia.',
+            metaLeftLabel: 'Ruang Tujuan',
+            metaLeftValue: 'Ruang Klaster 3 (Prioritas Lansia)',
+            metaRightLabel: 'Dokumen Dibawa',
+            metaRightValue: 'KTP Elektronik & Kartu BPJS Kesehatan',
+            pointsTitle: 'Paket Layanan & Skrining Gratis:',
+            points: [
+              'Pengkajian Paripurna Pasien Geriatri (P3G): Skrining Kemandirian (ADL), Risiko Jatuh & Demensia',
+              'Pemantauan Rutin Tekanan Darah, Gula Darah, Kolesterol & Fungsi Ginjal',
+              'Klub Prolanis (Program Pengelolaan Penyakit Kronis) & Senam Sehat Lansia',
+              'Skrining Katarak/Penglihatan, Pendengaran & Kunjungan Rumah (Home Care)'
+            ]
+          },
+          {
+            shortLabel: '6. Keluhan Khusus / UGD',
+            badge: 'KELOMPOK 6 • KLASTER 4 & LINTAS KLASTER',
+            icon: 'siren',
+            accent: 'from-rose-600 via-red-500 to-orange-500',
+            title: 'Gawat Darurat, Infeksi Menular & Kesehatan Gigi',
+            subtitle: 'Penanganan cepat kasus darurat medis 24 jam, gejala penyakit menular, serta perawatan kesehatan gigi dan mulut.',
+            metaLeftLabel: 'Ruang Tujuan',
+            metaLeftValue: 'UGD 24 Jam / Klaster 4 / Poli Gigi / Lab',
+            metaRightLabel: 'Dokumen Dibawa',
+            metaRightValue: 'KTP / BPJS (Kasus Darurat Langsung Dilayani)',
+            pointsTitle: 'Paket Layanan & Penanganan:',
+            points: [
+              'UGD 24 Jam: Penanganan kecelakaan, sesak napas akut, demam tinggi, luka & kegawatdaruratan',
+              'Klaster 4: Skrining TBC (Cek Dahak TCM), Malaria, DBD, Diare, HIV/IMS & Gigitan Hewan Rabies',
+              'Poli Gigi & Mulut: Pemeriksaan karies, pencabutan, penambalan & pembersihan karang gigi',
+              'Laboratorium & Farmasi: Pemeriksaan diagnostik darah/urin dan layanan apotek'
+            ]
+          }
+        ]
+      },
+
+      // 2. MENU KLASTER ILP (5 Slide)
+      'klaster-ilp': {
+        categoryTitle: '5 Pilar Klaster ILP',
+        items: [
+          {
+            shortLabel: 'Klaster 1: Manajemen',
+            badge: 'KLASTER 1 • TATA KELOLA & DIGITALISASI',
+            icon: 'building-2',
+            accent: 'from-slate-700 via-blue-600 to-cyan-600',
+            title: 'Manajemen Puskesmas & Sistem Informasi',
+            subtitle: 'Penggerak tata kelola mutu layanan, ketatausahaan, kepegawaian, manajemen sumber daya, serta digitalisasi Rekam Medis Elektronik (RME) SATUSEHAT.',
+            metaLeftLabel: 'Lokasi Unit',
+            metaLeftValue: 'Ruang Administrasi & Loket Pendaftaran',
+            metaRightLabel: 'Integrasi Sistem',
+            metaRightValue: 'RME SATUSEHAT Kemenkes RI',
+            pointsTitle: 'Cakupan Layanan & Fungsi Klaster 1:',
+            points: [
+              'Pendaftaran Terpadu, Rekam Medis Elektronik (RME) & Sistem Informasi Puskesmas',
+              'Manajemen Inti Puskesmas, Keuangan, Aset & Sumber Daya Manusia Kesehatan (SDMK)',
+              'Manajemen Mutu Pelayanan, Keselamatan Pasien & Pengaduan Masyarakat',
+              'Manajemen Jejaring Pustu, Poskesdes, Posyandu & Pemberdayaan Masyarakat 13 Desa'
+            ]
+          },
+          {
+            shortLabel: 'Klaster 2: Ibu & Anak',
+            badge: 'KLASTER 2 • KESEHATAN IBU, ANAK & REMAJA',
+            icon: 'baby',
+            accent: 'from-pink-500 via-rose-500 to-amber-500',
+            title: 'Ibu Hamil, Bersalin, Nifas, Bayi, Balita & Remaja',
+            subtitle: 'Pendampingan komprehensif kesehatan ibu dan tumbuh kembang generasi muda Kecamatan Wori sejak dalam kandungan hingga usia 17 tahun.',
+            metaLeftLabel: 'Lokasi Unit',
+            metaLeftValue: 'Ruang Pelayanan Klaster 2 & PONED',
+            metaRightLabel: 'Sasaran Siklus Hidup',
+            metaRightValue: 'Ibu Hamil/Nifas & Usia 0 – 17 Tahun',
+            pointsTitle: 'Cakupan Layanan & Skrining Klaster 2:',
+            points: [
+              'Ibu Hamil, Bersalin & Nifas: ANC Terpadu (6x), USG Dasar, Persalinan 24 Jam, Konseling ASI & KB',
+              'Bayi & Balita: Imunisasi Rutin Lengkap, Pemantauan Tumbuh Kembang (SDIDTK) & Pencegahan Stunting',
+              'Balita Sakit: Pelayanan Manajemen Terpadu Balita Sakit (MTBS) & Tata Laksana Gizi',
+              'Anak Sekolah & Remaja: Skrining Anemia Remaja Putri, UKS & Konseling PKPR'
+            ]
+          },
+          {
+            shortLabel: 'Klaster 3: Dewasa & Lansia',
+            badge: 'KLASTER 3 • USIA PRODUKTIF & LANJUT USIA',
+            icon: 'activity',
+            accent: 'from-blue-600 via-cyan-500 to-teal-500',
+            title: 'Usia Produktif / Dewasa (18–59) & Lansia (60+)',
+            subtitle: 'Deteksi dini Penyakit Tidak Menular (PTM), pengobatan penyakit kronis, serta pemeliharaan kemandirian dan kebugaran warga dewasa hingga lansia.',
+            metaLeftLabel: 'Lokasi Unit',
+            metaLeftValue: 'Ruang Pelayanan Klaster 3',
+            metaRightLabel: 'Sasaran Siklus Hidup',
+            metaRightValue: 'Dewasa (18–59 Thn) & Lansia (60+ Thn)',
+            pointsTitle: 'Cakupan Layanan & Skrining Klaster 3:',
+            points: [
+              'Skrining PTM Lengkap: Cek Tekanan Darah (Hipertensi), Gula Darah (Diabetes), Kolesterol, Asam Urat & Obesitas',
+              'Deteksi Dini Kanker & PPOK: Pemeriksaan IVA & Sadanis, Skrining Paru/Perokok, Mata & Telinga',
+              'Kesehatan Jiwa & Reproduksi: Skrining Kesehatan Jiwa (SRQ-20), Catin & Pelayanan KB',
+              'Layanan Lansia & Prolanis: Pengkajian Paripurna Pasien Geriatri (P3G), Posbindu & Senam Prolanis'
+            ]
+          },
+          {
+            shortLabel: 'Klaster 4: Penyakit Menular',
+            badge: 'KLASTER 4 • SURVEILANS & KESEHATAN LINGKUNGAN',
+            icon: 'shield-alert',
+            accent: 'from-emerald-600 via-teal-500 to-cyan-600',
+            title: 'Penanggulangan Penyakit Menular & Kesling',
+            subtitle: 'Pencegahan, kewaspadaan dini, pelacakan kasus penyakit menular berpotensi wabah, serta pengawasan kualitas kesehatan lingkungan di Kecamatan Wori.',
+            metaLeftLabel: 'Lokasi Unit',
+            metaLeftValue: 'Ruang Klaster 4, Poli TBC & Klinik Sanitasi',
+            metaRightLabel: 'Respon Lapangan',
+            metaRightValue: 'Tim Gerak Cepat (TGC) & Surveilans Desa',
+            pointsTitle: 'Cakupan Layanan & Surveilans Klaster 4:',
+            points: [
+              'Penyakit Menular Langsung: Poli DOTS TBC (Cek Dahak TCM), Konseling & Tes HIV/IMS, ISPA, Diare & Kusta',
+              'Tular Vektor & Zoonosis: Pengendalian DBD (PSN/Fogging Fokus), Skrining Malaria & Penanganan Gigitan Rabies (GHPR)',
+              'Kewaspadaan Dini: Surveilans Epidemiologi & Sistem Kewaspadaan Dini dan Respon (SKDR)',
+              'Kesehatan Lingkungan: Konseling Sanitasi (STBM), Inspeksi Air Bersih & Tempat Pengolahan Pangan'
+            ]
+          },
+          {
+            shortLabel: 'Lintas Klaster',
+            badge: 'LINTAS KLASTER • PENUNJANG & GAWAT DARURAT',
+            icon: 'stethoscope',
+            accent: 'from-rose-500 via-cyan-500 to-teal-500',
+            title: 'UGD 24 Jam, Lab, Gigi, Farmasi & Jejaring Desa',
+            subtitle: 'Unit layanan penunjang yang mendukung seluruh Klaster 2, 3, dan 4 secara terintegrasi, mulai dari penanganan darurat 24 jam hingga jejaring 13 desa.',
+            metaLeftLabel: 'Layanan Siaga',
+            metaLeftValue: 'UGD 24 Jam & Ambulans Rujukan',
+            metaRightLabel: 'Unit Penunjang',
+            metaRightValue: 'Laboratorium, Poli Gigi, Apotek & Pustu',
+            pointsTitle: 'Unit Layanan Lintas Klaster:',
+            points: [
+              'UGD 24 Jam & Persalinan: Penanganan gawat darurat medis, kecelakaan, observasi & Ambulans Siaga',
+              'Laboratorium & Poli Gigi: Pemeriksaan darah rutin, kimia darah, urin, TCM TBC, serta perawatan Gigi & Mulut',
+              'Pelayanan Kefarmasian (Apotek): Penyerahan obat resep elektronik klaster & Konseling Informasi Obat',
+              'Jejaring Wilayah: Puskesmas Pembantu (Pustu), Poskesdes & Posyandu Siklus Hidup di 13 Desa Wori'
+            ]
+          }
+        ]
+      },
+
+      // 3. MENU ALUR PELAYANAN PASIEN (5 Slide)
+      'alur-pelayanan': {
+        categoryTitle: 'Alur Pelayanan Pasien ILP',
+        items: [
+          {
+            shortLabel: 'Tahap 1: Pendaftaran',
+            badge: 'LANGKAH 01 DARI 05 • KLASTER 1',
+            icon: 'clipboard-check',
+            accent: 'from-blue-600 via-cyan-500 to-teal-500',
+            title: 'Pendaftaran & Identifikasi Siklus Hidup',
+            subtitle: 'Pasien datang ke Loket Pendaftaran Puskesmas Wori (atau melalui antrean Mobile JKN). Petugas memverifikasi identitas dan menentukan ruang Klaster sesuai usia.',
+            metaLeftLabel: 'Estimasi Waktu',
+            metaLeftValue: '3 – 5 Menit',
+            metaRightLabel: 'Lokasi',
+            metaRightValue: 'Loket Pendaftaran Terpadu (Klaster 1)',
+            pointsTitle: 'Hal yang Dilakukan pada Tahap 1:',
+            points: [
+              'Ambil nomor antrean pendaftaran atau tunjukkan bukti daftar antrean Mobile JKN',
+              'Verifikasi NIK KTP / Kartu Keluarga / Kartu BPJS Kesehatan / Buku KIA pada Rekam Medis Elektronik',
+              'Petugas mengarahkan ke Klaster 2 (Ibu Hamil, Bayi, Balita, Remaja) atau Klaster 3 (Dewasa & Lansia)',
+              'Khusus pasien kondisi Gawat Darurat langsung menuju UGD 24 Jam tanpa perlu antre loket'
+            ]
+          },
+          {
+            shortLabel: 'Tahap 2: Skrining Awal',
+            badge: 'LANGKAH 02 DARI 05 • MEJA SKRINING KLASTER',
+            icon: 'heart-pulse',
+            accent: 'from-teal-600 via-cyan-500 to-blue-500',
+            title: 'Skrining Awal Sesuai Kelompok Usia',
+            subtitle: 'Di ruang Klaster, Perawat atau Bidan melakukan pengkajian awal dan paket skrining wajib sesuai kelompok usia Anda sebelum masuk pemeriksaan dokter.',
+            metaLeftLabel: 'Estimasi Waktu',
+            metaLeftValue: '5 – 10 Menit',
+            metaRightLabel: 'Petugas',
+            metaRightValue: 'Perawat / Bidan Klaster 2 & Klaster 3',
+            pointsTitle: 'Pemeriksaan pada Tahap 2:',
+            points: [
+              'Pengukuran tanda vital (Tekanan Darah, Suhu Tubuh, Nadi, dan Pernapasan)',
+              'Pengukuran Antropometri (Berat Badan, Tinggi Badan, Lingkar Perut / Lingkar Kepala Balita)',
+              'Pengisian instrumen skrining siklus hidup sesuai usia (misal: skrining PTM, tumbuh kembang, atau jiwa)',
+              'Seluruh warga mendapatkan manfaat deteksi dini gratis walaupun datang dengan keluhan ringan'
+            ]
+          },
+          {
+            shortLabel: 'Tahap 3: Pemeriksaan Medis',
+            badge: 'LANGKAH 03 DARI 05 • RUANG KLASTER 2 / 3 / 4',
+            icon: 'user-check',
+            accent: 'from-cyan-600 via-blue-600 to-indigo-600',
+            title: 'Pemeriksaan Medis & Konsultasi Komprehensif',
+            subtitle: 'Dokter bersama tim medis klaster memeriksa keluhan kesehatan Anda sekaligus mengevaluasi hasil skrining siklus hidup secara menyeluruh.',
+            metaLeftLabel: 'Estimasi Waktu',
+            metaLeftValue: '10 – 15 Menit',
+            metaRightLabel: 'Tim Medis',
+            metaRightValue: 'Dokter, Bidan, Perawat & Tenaga Gizi',
+            pointsTitle: 'Layanan pada Tahap 3:',
+            points: [
+              'Anamnesis dan pemeriksaan fisik menyeluruh oleh Dokter di ruang klaster',
+              'Evaluasi hasil skrining awal dan pemberian edukasi gaya hidup sehat sesuai usia',
+              'Koordinasi ke Klaster 4 bila ditemukan indikasi penyakit menular atau masalah sanitasi lingkungan',
+              'Penerbitan pengantar pemeriksaan Laboratorium atau resep obat secara elektronik (RME)'
+            ]
+          },
+          {
+            shortLabel: 'Tahap 4: Lab / Gigi / Obat',
+            badge: 'LANGKAH 04 DARI 05 • LINTAS KLASTER',
+            icon: 'flask-conical',
+            accent: 'from-purple-600 via-indigo-500 to-blue-500',
+            title: 'Layanan Penunjang: Lab, Gigi, atau Farmasi',
+            subtitle: 'Bila diperlukan pemeriksaan penunjang laboratorium, tindakan gigi, atau pengambilan obat resep, pasien dilayani di unit Lintas Klaster.',
+            metaLeftLabel: 'Estimasi Waktu',
+            metaLeftValue: '10 – 20 Menit (Sesuai Indikasi)',
+            metaRightLabel: 'Unit Tujuan',
+            metaRightValue: 'Laboratorium, Poli Gigi & Ruang Farmasi',
+            pointsTitle: 'Alur pada Tahap 4:',
+            points: [
+              'Pemeriksaan sampel darah, gula darah, kolesterol, asam urat, urin, atau dahak di Laboratorium',
+              'Hasil laboratorium terhubung ke ruang dokter klaster untuk penentuan terapi yang tepat',
+              'Pengambilan obat di Ruang Farmasi (Apotek) tanpa perlu membawa kertas resep manual',
+              'Pemberian Pelayanan Informasi Obat (PIO) oleh Apoteker/Tenaga Teknis Kefarmasian'
+            ]
+          },
+          {
+            shortLabel: 'Tahap 5: Tindak Lanjut',
+            badge: 'LANGKAH 05 DARI 05 • JEJARING DESA & SATUSEHAT',
+            icon: 'check-circle-2',
+            accent: 'from-emerald-600 via-teal-500 to-cyan-500',
+            title: 'Pulang Sehat / Pemantauan Pustu & Posyandu',
+            subtitle: 'Riwayat kesehatan tercatat di SATUSEHAT. Pasien dapat pulang ke rumah, dirujuk ke RS bila perlu, atau dipantau berkelanjutan oleh jejaring desa.',
+            metaLeftLabel: 'Pencatatan',
+            metaLeftValue: 'Tersimpan di Aplikasi SATUSEHAT',
+            metaRightLabel: 'Pemantauan Wilayah',
+            metaRightValue: 'Pustu, Poskesdes & Posyandu 13 Desa',
+            pointsTitle: 'Tindak Lanjut pada Tahap 5:',
+            points: [
+              'Pasien kondisi membaik dapat langsung pulang dengan panduan perawatan mandiri di rumah',
+              'Pasien yang membutuhkan penanganan spesialistik diberikan surat rujukan ke Rumah Sakit',
+              'Pasien penyakit kronis (Hipertensi/Diabetes), ibu hamil risti & balita dipantau oleh Pustu/Bidan Desa',
+              'Kontrol berkala bulanan dapat dilanjutkan di Posyandu Siklus Hidup desa tempat tinggal Anda'
+            ]
+          }
+        ]
+      },
+
+      // 4. MENU JEJARING 13 DESA WORI (13 Slide Desa)
+      'jejaring-wori': {
+        categoryTitle: 'Jejaring 13 Desa Wilayah Kerja',
+        items: [
+          {
+            shortLabel: '1. Desa Wori',
+            badge: 'DESA 01 DARI 13 • PUSAT WILAYAH KERJA',
+            icon: 'map-pin',
+            accent: 'from-blue-600 via-cyan-500 to-teal-500',
+            title: 'Desa Wori',
+            subtitle: 'Lokasi Puskesmas Induk Wori serta pusat koordinasi Integrasi Layanan Primer (ILP) dan Posyandu Siklus Hidup di Desa Wori.',
+            metaLeftLabel: 'Fasilitas Kesehatan',
+            metaLeftValue: 'Puskesmas Induk Wori & Posyandu ILP',
+            metaRightLabel: 'Kecamatan / Kab.',
+            metaRightValue: 'Kec. Wori, Kab. Minahasa Utara',
+            pointsTitle: 'Layanan Jejaring di Desa Wori:',
+            points: [
+              'Pelayanan langsung Klaster 1–4, UGD 24 Jam, Persalinan, Lab & Apotek di Puskesmas Induk',
+              'Posyandu Siklus Hidup melayani Ibu Hamil, Bayi, Balita, Remaja, Dewasa & Lansia',
+              'Kunjungan Rumah (Home Care) oleh tim kesehatan Puskesmas dan Kader Posyandu',
+              'Pemantauan jentik berkala, sanitasi lingkungan (STBM) & kelas ibu hamil desa'
+            ]
+          },
+          {
+            shortLabel: '2. Desa Tiwoho',
+            badge: 'DESA 02 DARI 13 • JEJARING PUSTU & POSYANDU',
+            icon: 'map-pin',
+            accent: 'from-teal-600 via-cyan-500 to-blue-500',
+            title: 'Desa Tiwoho',
+            subtitle: 'Dilayani oleh jaringan Puskesmas Pembantu (Pustu) dan Posyandu Siklus Hidup yang terintegrasi dengan Puskesmas Wori.',
+            metaLeftLabel: 'Fasilitas Kesehatan',
+            metaLeftValue: 'Pustu Tiwoho & Posyandu Siklus Hidup',
+            metaRightLabel: 'Tenaga Kesehatan',
+            metaRightValue: 'Bidan Desa, Perawat Pustu & Kader ILP',
+            pointsTitle: 'Layanan Kesehatan di Desa Tiwoho:',
+            points: [
+              'Pelayanan kesehatan dasar, pemeriksaan kehamilan (ANC) & pemantauan nifas di Pustu',
+              'Posyandu Siklus Hidup bulanan untuk penimbangan balita, imunisasi & skrining PTM dewasa/lansia',
+              'Kunjungan rumah keluarga binaan oleh Kader Posyandu dan tenaga kesehatan Pustu',
+              'Rujukan cepat terkoordinasi ke Puskesmas Induk Wori bila memerlukan pemeriksaan dokter/lab'
+            ]
+          },
+          {
+            shortLabel: '3. Desa Budo',
+            badge: 'DESA 03 DARI 13 • JEJARING PUSTU & POSYANDU',
+            icon: 'map-pin',
+            accent: 'from-cyan-600 via-teal-500 to-emerald-500',
+            title: 'Desa Budo',
+            subtitle: 'Dilayani oleh jaringan Puskesmas Pembantu (Pustu) dan Posyandu Siklus Hidup bagi seluruh warga Desa Budo.',
+            metaLeftLabel: 'Fasilitas Kesehatan',
+            metaLeftValue: 'Pustu Budo & Posyandu Siklus Hidup',
+            metaRightLabel: 'Tenaga Kesehatan',
+            metaRightValue: 'Bidan Desa, Perawat Pustu & Kader ILP',
+            pointsTitle: 'Layanan Kesehatan di Desa Budo:',
+            points: [
+              'Pemeriksaan kesehatan dasar, KIA, dan konsultasi gizi masyarakat di Pustu Budo',
+              'Posyandu Siklus Hidup: layanan terpadu Ibu Hamil, Balita, Remaja, Usia Produktif & Lansia',
+              'Deteksi dini hipertensi, cek gula darah berkala, dan senam sehat warga',
+              'Pemantauan kesehatan lingkungan dan edukasi Perilaku Hidup Bersih dan Sehat (PHBS)'
+            ]
+          },
+          {
+            shortLabel: '4. Desa Darunu',
+            badge: 'DESA 04 DARI 13 • JEJARING PUSTU & POSYANDU',
+            icon: 'map-pin',
+            accent: 'from-blue-600 via-indigo-500 to-cyan-500',
+            title: 'Desa Darunu',
+            subtitle: 'Jejaring layanan primer Puskesmas Wori melalui Pustu dan Posyandu Siklus Hidup di Desa Darunu.',
+            metaLeftLabel: 'Fasilitas Kesehatan',
+            metaLeftValue: 'Pustu Darunu & Posyandu Siklus Hidup',
+            metaRightLabel: 'Tenaga Kesehatan',
+            metaRightValue: 'Bidan Desa, Perawat & Kader Posyandu',
+            pointsTitle: 'Layanan Kesehatan di Desa Darunu:',
+            points: [
+              'Layanan pemeriksaan ibu hamil, imunisasi bayi/balita, dan pemantauan tumbuh kembang',
+              'Skrining faktor risiko Penyakit Tidak Menular (tensi, berat badan, lingkar perut, gula darah)',
+              'Pendampingan minum obat teratur bagi pasien hipertensi, diabetes, dan TBC',
+              'Kunjungan rumah berkala untuk keluarga dengan risiko kesehatan'
+            ]
+          },
+          {
+            shortLabel: '5. Desa Bulo',
+            badge: 'DESA 05 DARI 13 • JEJARING POSKESDES & POSYANDU',
+            icon: 'map-pin',
+            accent: 'from-teal-600 via-emerald-500 to-cyan-500',
+            title: 'Desa Bulo',
+            subtitle: 'Jejaring layanan kesehatan dasar melalui Poskesdes dan Posyandu Siklus Hidup bagi masyarakat Desa Bulo.',
+            metaLeftLabel: 'Fasilitas Kesehatan',
+            metaLeftValue: 'Poskesdes Bulo & Posyandu Siklus Hidup',
+            metaRightLabel: 'Tenaga Kesehatan',
+            metaRightValue: 'Bidan Desa, Perawat & Kader Posyandu',
+            pointsTitle: 'Layanan Kesehatan di Desa Bulo:',
+            points: [
+              'Pelayanan KIA, KB, imunisasi rutin, dan pencegahan stunting balita',
+              'Posyandu Siklus Hidup untuk pemeriksaan kesehatan remaja, dewasa, hingga lansia',
+              'Penyuluhan kesehatan masyarakat dan surveilans faktor risiko penyakit menular',
+              'Koordinasi rujukan langsung ke Puskesmas Wori untuk penanganan medis lanjutan'
+            ]
+          },
+          {
+            shortLabel: '6. Desa Kima Bajo',
+            badge: 'DESA 06 DARI 13 • JEJARING PUSTU & POSYANDU',
+            icon: 'map-pin',
+            accent: 'from-blue-600 via-cyan-500 to-teal-500',
+            title: 'Desa Kima Bajo',
+            subtitle: 'Pelayanan kesehatan primer melalui Pustu Kima Bajo dan Posyandu Siklus Hidup bagi warga pesisir Desa Kima Bajo.',
+            metaLeftLabel: 'Fasilitas Kesehatan',
+            metaLeftValue: 'Pustu Kima Bajo & Posyandu Siklus Hidup',
+            metaRightLabel: 'Tenaga Kesehatan',
+            metaRightValue: 'Bidan Desa, Perawat Pustu & Kader ILP',
+            pointsTitle: 'Layanan Kesehatan di Desa Kima Bajo:',
+            points: [
+              'Pemeriksaan kehamilan, pemantauan gizi balita, dan layanan imunisasi lengkap',
+              'Skrining PTM usia produktif dan pengkajian kesehatan lanjut usia di Posyandu',
+              'Pemantauan sanitasi air bersih dan pencegahan penyakit menular berbasis lingkungan',
+              'Kunjungan rumah terpadu oleh Bidan Desa dan Kader Kesehatan'
+            ]
+          },
+          {
+            shortLabel: '7. Desa Talawaan Bantik',
+            badge: 'DESA 07 DARI 13 • JEJARING PUSTU & POSYANDU',
+            icon: 'map-pin',
+            accent: 'from-cyan-600 via-blue-500 to-indigo-500',
+            title: 'Desa Talawaan Bantik',
+            subtitle: 'Jejaring Puskesmas Pembantu (Pustu) dan Posyandu Siklus Hidup yang melayani masyarakat Desa Talawaan Bantik.',
+            metaLeftLabel: 'Fasilitas Kesehatan',
+            metaLeftValue: 'Pustu Talawaan Bantik & Posyandu ILP',
+            metaRightLabel: 'Tenaga Kesehatan',
+            metaRightValue: 'Bidan Desa, Perawat Pustu & Kader ILP',
+            pointsTitle: 'Layanan Kesehatan di Desa Talawaan Bantik:',
+            points: [
+              'Pelayanan kesehatan ibu dan anak, konseling gizi, serta pemberian vitamin & imunisasi',
+              'Pemeriksaan tekanan darah, gula darah, dan edukasi pencegahan penyakit kronis',
+              'Skrining anemia remaja putri dan kegiatan usaha kesehatan sekolah/remaja',
+              'Tindak lanjut perawatan rumah (Home Care) bagi lansia dan pasien kronis'
+            ]
+          },
+          {
+            shortLabel: '8. Desa Talawaan Atas',
+            badge: 'DESA 08 DARI 13 • JEJARING PUSTU & POSYANDU',
+            icon: 'map-pin',
+            accent: 'from-teal-600 via-cyan-500 to-blue-500',
+            title: 'Desa Talawaan Atas',
+            subtitle: 'Pelayanan kesehatan dekat warga melalui Pustu Talawaan Atas dan Posyandu Siklus Hidup.',
+            metaLeftLabel: 'Fasilitas Kesehatan',
+            metaLeftValue: 'Pustu Talawaan Atas & Posyandu ILP',
+            metaRightLabel: 'Tenaga Kesehatan',
+            metaRightValue: 'Bidan Desa, Perawat Pustu & Kader ILP',
+            pointsTitle: 'Layanan Kesehatan di Desa Talawaan Atas:',
+            points: [
+              'Pemeriksaan kesehatan dasar, ANC ibu hamil, dan pemantauan tumbuh kembang balita',
+              'Posyandu Siklus Hidup untuk skrining kesehatan usia dewasa dan lanjut usia',
+              'Pemberdayaan masyarakat desa dalam pencegahan DBD dan kebersihan lingkungan',
+              'Layanan Puskesmas Keliling (Pusling) terjadwal dari Puskesmas Wori'
+            ]
+          },
+          {
+            shortLabel: '9. Desa Lansa',
+            badge: 'DESA 09 DARI 13 • JEJARING POSKESDES & POSYANDU',
+            icon: 'map-pin',
+            accent: 'from-emerald-600 via-teal-500 to-cyan-500',
+            title: 'Desa Lansa',
+            subtitle: 'Jejaring pelayanan kesehatan masyarakat melalui Poskesdes dan Posyandu Siklus Hidup di Desa Lansa.',
+            metaLeftLabel: 'Fasilitas Kesehatan',
+            metaLeftValue: 'Poskesdes Lansa & Posyandu Siklus Hidup',
+            metaRightLabel: 'Tenaga Kesehatan',
+            metaRightValue: 'Bidan Desa, Perawat & Kader Posyandu',
+            pointsTitle: 'Layanan Kesehatan di Desa Lansa:',
+            points: [
+              'Pemantauan kesehatan ibu hamil, nifas, bayi, dan balita secara berkala',
+              'Skrining kesehatan usia produktif dan lansia (cek tensi, gula darah & konseling sehat)',
+              'Kunjungan rumah oleh kader untuk pemantauan kepatuhan pengobatan warga',
+              'Edukasi gizi keluarga dan pencegahan stunting terpadu'
+            ]
+          },
+          {
+            shortLabel: '10. Desa Lantung',
+            badge: 'DESA 10 DARI 13 • JEJARING POSKESDES & POSYANDU',
+            icon: 'map-pin',
+            accent: 'from-blue-600 via-cyan-500 to-teal-500',
+            title: 'Desa Lantung',
+            subtitle: 'Jejaring pelayanan kesehatan dasar melalui Poskesdes dan Posyandu Siklus Hidup di Desa Lantung.',
+            metaLeftLabel: 'Fasilitas Kesehatan',
+            metaLeftValue: 'Poskesdes Lantung & Posyandu Siklus Hidup',
+            metaRightLabel: 'Tenaga Kesehatan',
+            metaRightValue: 'Bidan Desa, Perawat & Kader Posyandu',
+            pointsTitle: 'Layanan Kesehatan di Desa Lantung:',
+            points: [
+              'Pelayanan KIA, imunisasi rutin lengkap, dan pemantauan status gizi anak',
+              'Deteksi dini penyakit tidak menular (Hipertensi, Diabetes, Obesitas) bagi warga dewasa',
+              'Pelayanan kesehatan ramah lansia dan senam kebugaran bersama',
+              'Surveilans kesehatan lingkungan dan pencegahan penyakit menular'
+            ]
+          },
+          {
+            shortLabel: '11. Desa Minaesa',
+            badge: 'DESA 11 DARI 13 • JEJARING POSKESDES & POSYANDU',
+            icon: 'map-pin',
+            accent: 'from-cyan-600 via-teal-500 to-emerald-500',
+            title: 'Desa Minaesa',
+            subtitle: 'Pelayanan kesehatan primer terintegrasi melalui Poskesdes dan Posyandu Siklus Hidup di Desa Minaesa.',
+            metaLeftLabel: 'Fasilitas Kesehatan',
+            metaLeftValue: 'Poskesdes Minaesa & Posyandu Siklus Hidup',
+            metaRightLabel: 'Tenaga Kesehatan',
+            metaRightValue: 'Bidan Desa, Perawat & Kader Posyandu',
+            pointsTitle: 'Layanan Kesehatan di Desa Minaesa:',
+            points: [
+              'Layanan pemeriksaan kehamilan, konseling menyusui, dan imunisasi bayi/balita',
+              'Skrining kesehatan berkala bagi remaja, usia dewasa, dan lanjut usia di Posyandu',
+              'Pendampingan keluarga binaan melalui kunjungan rumah kader kesehatan',
+              'Rujukan terintegrasi ke Puskesmas Wori untuk layanan dokter & laboratorium'
+            ]
+          },
+          {
+            shortLabel: '12. Desa Ponto',
+            badge: 'DESA 12 DARI 13 • JEJARING POSKESDES & POSYANDU',
+            icon: 'map-pin',
+            accent: 'from-indigo-600 via-blue-500 to-cyan-500',
+            title: 'Desa Ponto',
+            subtitle: 'Jejaring pelayanan kesehatan masyarakat melalui Poskesdes dan Posyandu Siklus Hidup di Desa Ponto.',
+            metaLeftLabel: 'Fasilitas Kesehatan',
+            metaLeftValue: 'Poskesdes Ponto & Posyandu Siklus Hidup',
+            metaRightLabel: 'Tenaga Kesehatan',
+            metaRightValue: 'Bidan Desa, Perawat & Kader Posyandu',
+            pointsTitle: 'Layanan Kesehatan di Desa Ponto:',
+            points: [
+              'Pelayanan kesehatan ibu dan anak, penimbangan balita, serta edukasi MP-ASI',
+              'Pemeriksaan tekanan darah, skrining gula darah, dan konseling berhenti merokok',
+              'Pemantauan kesehatan lanjut usia dan pencegahan risiko jatuh/demensia',
+              'Pengawasan sanitasi lingkungan desa dan pemberantasan sarang nyamuk'
+            ]
+          },
+          {
+            shortLabel: '13. Desa Kulu',
+            badge: 'DESA 13 DARI 13 • JEJARING PUSTU & POSYANDU',
+            icon: 'map-pin',
+            accent: 'from-teal-600 via-cyan-500 to-blue-600',
+            title: 'Desa Kulu',
+            subtitle: 'Dilayani oleh jaringan Puskesmas Pembantu (Pustu) Kulu dan Posyandu Siklus Hidup bagi seluruh warga Desa Kulu.',
+            metaLeftLabel: 'Fasilitas Kesehatan',
+            metaLeftValue: 'Pustu Kulu & Posyandu Siklus Hidup',
+            metaRightLabel: 'Tenaga Kesehatan',
+            metaRightValue: 'Bidan Desa, Perawat Pustu & Kader ILP',
+            pointsTitle: 'Layanan Kesehatan di Desa Kulu:',
+            points: [
+              'Pelayanan kesehatan dasar, pemeriksaan ibu hamil (ANC) & layanan KB di Pustu Kulu',
+              'Posyandu Siklus Hidup untuk bayi, balita, remaja, usia produktif, dan lansia',
+              'Skrining penyakit tidak menular & pemantauan terapi obat pasien kronis',
+              'Kunjungan rumah terpadu dan koordinasi rujukan ke Puskesmas Induk Wori'
+            ]
+          }
+        ]
+      },
+
+      // 5. MENU LOKASI, JAM BUKA & KONTAK PENGADUAN (3 Slide)
+      'kontak-lokasi': {
+        categoryTitle: 'Lokasi, Jam Pelayanan & Kontak',
+        items: [
+          {
+            shortLabel: '1. Lokasi Puskesmas',
+            badge: 'INFORMASI 01 DARI 03 • LOKASI & ALAMAT',
+            icon: 'map-pin',
+            accent: 'from-blue-600 via-cyan-500 to-teal-500',
+            title: 'Lokasi UPTD Puskesmas Wori',
+            subtitle: 'Terletak strategis di jalan utama Kecamatan Wori sehingga mudah diakses oleh masyarakat dari seluruh 13 desa wilayah kerja.',
+            metaLeftLabel: 'Alamat Lengkap',
+            metaLeftValue: 'Jl. Raya Wori, Desa Wori, Kec. Wori',
+            metaRightLabel: 'Kabupaten / Provinsi',
+            metaRightValue: 'Minahasa Utara, Sulawesi Utara 95376',
+            pointsTitle: 'Akses & Fasilitas Gedung:',
+            points: [
+              'Berada di jalur utama Kecamatan Wori, Kabupaten Minahasa Utara',
+              'Dilengkapi area parkir ambulans, jalur kursi roda ramah lansia/disabilitas & ruang tunggu nyaman',
+              'Tersedia Ruang Laktasi (Ibu Menyusui), Pojok Oralit, dan Area Bermain Anak',
+              'Klik tombol Google Maps di bawah untuk petunjuk arah navigasi langsung'
+            ],
+            actionType: 'maps'
+          },
+          {
+            shortLabel: '2. Jam Buka Pelayanan',
+            badge: 'INFORMASI 02 DARI 03 • JADWAL OPERASIONAL',
+            icon: 'clock',
+            accent: 'from-teal-600 via-cyan-500 to-blue-500',
+            title: 'Jam Buka Pelayanan Puskesmas Wori',
+            subtitle: 'Jadwal pendaftaran pelayanan Klaster ILP reguler serta layanan siaga Unit Gawat Darurat (UGD) dan Persalinan 24 Jam.',
+            metaLeftLabel: 'UGD & Persalinan',
+            metaLeftValue: 'Buka 24 Jam Nonstop (Setiap Hari)',
+            metaRightLabel: 'Zona Waktu',
+            metaRightValue: 'WITA (Waktu Indonesia Tengah)',
+            pointsTitle: 'Rincian Jam Pelayanan:',
+            points: [
+              'Senin – Kamis (Pendaftaran Klaster ILP): Pukul 07.30 – 14.00 WITA',
+              'Jumat (Pendaftaran Klaster ILP): Pukul 07.30 – 11.30 WITA',
+              'Sabtu (Pendaftaran Klaster ILP): Pukul 07.30 – 13.00 WITA',
+              'Unit Gawat Darurat (UGD) & Ruang Persalinan (PONED): Buka 24 Jam termasuk Minggu & Hari Libur'
+            ]
+          },
+          {
+            shortLabel: '3. Kontak & Pengaduan',
+            badge: 'INFORMASI 03 DARI 03 • LAYANAN PENGADUAN',
+            icon: 'message-square-heart',
+            accent: 'from-cyan-600 via-blue-600 to-indigo-600',
+            title: 'Kontak Darurat & Layanan Pengaduan Masyarakat',
+            subtitle: 'Kami terbuka menerima pertanyaan seputar layanan ILP, saran perbaikan, maupun pengaduan demi mutu pelayanan Puskesmas Wori.',
+            metaLeftLabel: 'Hotline UGD / PSC',
+            metaLeftValue: '0811-4300-911 / 119',
+            metaRightLabel: 'WhatsApp Pengaduan',
+            metaRightValue: '0821-9000-7654',
+            pointsTitle: 'Saluran Resmi Komunikasi & Pengaduan:',
+            points: [
+              'Hotline Gawat Darurat & Ambulans Puskesmas Wori: 0811-4300-911 / 119',
+              'WhatsApp Informasi Layanan & Pengaduan Masyarakat: 0821-9000-7654',
+              'Alamat Email Resmi: pkmwori.minut@gmail.com',
+              'Kotak Saran & Pengaduan Online Terintegrasi Tim Mutu Klaster 1 (Klik tombol di bawah)'
+            ],
+            actionType: 'complaint'
+          }
+        ]
+      }
+    };
+
+    // Fungsi Berpindah Menu Navigasi Utama
+    function switchPage(pageId, closeDrawer = false) {
+      currentSection = pageId;
+
+      const berandaEl = document.getElementById('view-beranda');
+      const sliderEl = document.getElementById('view-slider');
+
+      if (pageId === 'beranda') {
+        berandaEl.classList.remove('hidden');
+        sliderEl.classList.add('hidden');
+      } else {
+        berandaEl.classList.add('hidden');
+        sliderEl.classList.remove('hidden');
+        currentSlideIndex = 0; // Selalu mulai dari item pertama (misal: Ibu Hamil & Nifas)
+        renderCurrentSlide('right');
+      }
+
+      // Highlight active menu on desktop
+      document.querySelectorAll('.nav-item').forEach(btn => {
+        if (btn.dataset.nav === pageId) {
+          btn.className = "nav-item px-3.5 py-2 rounded-full text-xs font-bold gemini-gradient-bg text-white shadow-sm transition";
+        } else {
+          btn.className = "nav-item px-3.5 py-2 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-blue-600 dark:hover:text-cyan-400 hover:bg-slate-100/80 dark:hover:bg-slate-700/60 transition";
+        }
+      });
+
+      // Highlight active menu on mobile drawer
+      document.querySelectorAll('.mobile-nav-item').forEach(btn => {
+        if (btn.dataset.navMobile === pageId) {
+          btn.className = "mobile-nav-item flex items-center gap-3 w-full text-left px-4 py-3 rounded-2xl text-sm font-bold bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-cyan-400 border border-blue-200 dark:border-slate-700 transition";
+        } else {
+          btn.className = "mobile-nav-item flex items-center gap-3 w-full text-left px-4 py-3 rounded-2xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition";
+        }
+      });
+
+      if (closeDrawer) {
+        document.getElementById('mobileMenu').classList.add('hidden');
+      }
+    }
+
+    // Fungsi Render Slide Aktif (Mode Geser Kiri / Kanan)
+    function renderCurrentSlide(direction = 'right') {
+      const sectionObj = menuSlidesData[currentSection];
+      if (!sectionObj) return;
+
+      const items = sectionObj.items;
+      const total = items.length;
+      if (currentSlideIndex < 0) currentSlideIndex = total - 1;
+      if (currentSlideIndex >= total) currentSlideIndex = 0;
+
+      const slide = items[currentSlideIndex];
+
+      // Update Header Info & Counter
+      document.getElementById('sliderCategoryBadge').textContent = sectionObj.categoryTitle;
+      document.getElementById('sliderCounter').textContent = `${currentSlideIndex + 1} / ${total}`;
+
+      // Update Pills Bar (Indikator Atas)
+      const pillsContainer = document.getElementById('sliderPills');
+      pillsContainer.innerHTML = items.map((it, idx) => {
+        const isActive = idx === currentSlideIndex;
+        return `
+          <button onclick="goToSlide(${idx})" id="pill-btn-${idx}" class="shrink-0 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
+            isActive
+              ? 'gemini-gradient-bg text-white shadow-sm scale-105'
+              : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200/90 dark:border-slate-800 hover:border-cyan-400'
+          }">
+            ${it.shortLabel}
+          </button>
+        `;
+      }).join('');
+
+      // Auto-scroll active pill into view horizontally
+      const activePillEl = document.getElementById(`pill-btn-${currentSlideIndex}`);
+      if (activePillEl) {
+        activePillEl.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+
+      // Update Prev / Next Labels at Bottom
+      const prevIdx = (currentSlideIndex - 1 + total) % total;
+      const nextIdx = (currentSlideIndex + 1) % total;
+      document.getElementById('prevSlideLabel').textContent = items[prevIdx].shortLabel;
+      document.getElementById('nextSlideLabel').textContent = items[nextIdx].shortLabel;
+
+      // Optional Action Button inside Card (e.g., Google Maps or Kotak Saran)
+      let extraActionHtml = '';
+      if (slide.actionType === 'maps') {
+        extraActionHtml = `
+          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-end">
+            <a href="https://maps.google.com/?q=Puskesmas+Wori+Minahasa+Utara" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl gemini-gradient-bg text-white text-xs font-bold shadow-sm hover:opacity-95 transition">
+              <i data-lucide="map" class="w-4 h-4"></i>
+              <span>Buka Lokasi di Google Maps</span>
+            </a>
+          </div>
+        `;
+      } else if (slide.actionType === 'complaint') {
+        extraActionHtml = `
+          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-end">
+            <button onclick="openComplaintModal()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl gemini-gradient-bg text-white text-xs font-bold shadow-sm hover:opacity-95 transition">
+              <i data-lucide="send" class="w-4 h-4"></i>
+              <span>Buka Formulir Saran / Pengaduan Online</span>
+            </button>
+          </div>
+        `;
+      }
+
+      // Render Single Card inside Viewport with Slide Left/Right Animation
+      const animClass = direction === 'left' ? 'slide-enter-left' : 'slide-enter-right';
+      const viewport = document.getElementById('slideCardViewport');
+      viewport.innerHTML = `
+        <article class="${animClass} bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-8 shadow-soft-lg border border-slate-200/90 dark:border-slate-800 relative overflow-hidden">
+          <!-- Top Gradient Accent Bar -->
+          <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r ${slide.accent}"></div>
+
+          <!-- Card Header -->
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold bg-cyan-50 dark:bg-cyan-950/80 text-cyan-800 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">
+                ${slide.badge}
+              </span>
+              <h2 class="mt-2.5 text-xl sm:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight">
+                ${slide.title}
+              </h2>
+              <p class="mt-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-body">
+                ${slide.subtitle}
+              </p>
+            </div>
+            <div class="hidden sm:flex w-12 h-12 rounded-2xl bg-gradient-to-br ${slide.accent} text-white items-center justify-center shrink-0 shadow-md">
+              <i data-lucide="${slide.icon}" class="w-6 h-6"></i>
+            </div>
+          </div>
+
+          <!-- Meta Info Boxes (2 Columns) -->
+          <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
+            <div class="p-3 sm:p-3.5 rounded-2xl bg-[#f8fafd] dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700">
+              <p class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400">${slide.metaLeftLabel}</p>
+              <p class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white mt-0.5">${slide.metaLeftValue}</p>
+            </div>
+            <div class="p-3 sm:p-3.5 rounded-2xl bg-[#f8fafd] dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700">
+              <p class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400">${slide.metaRightLabel}</p>
+              <p class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white mt-0.5">${slide.metaRightValue}</p>
+            </div>
+          </div>
+
+          <!-- Points List -->
+          <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
+            <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2.5">${slide.pointsTitle}</p>
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
+              ${slide.points.map(pt => `
+                <li class="flex items-start gap-2 text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-snug">
+                  <i data-lucide="check-circle-2" class="w-4 h-4 text-teal-600 dark:text-teal-400 shrink-0 mt-0.5"></i>
+                  <span>${pt}</span>
+                </li>
+              `).join('')}
+            </ul>
+          </div>
+
+          ${extraActionHtml}
+        </article>
+      `;
+
+      lucide.createIcons();
+    }
+
+    // Fungsi Geser ke Kanan (Slide Berikutnya)
+    function nextSlide() {
+      if (currentSection === 'beranda') return;
+      currentSlideIndex++;
+      renderCurrentSlide('right');
+    }
+
+    // Fungsi Geser ke Kiri (Slide Sebelumnya)
+    function prevSlide() {
+      if (currentSection === 'beranda') return;
+      currentSlideIndex--;
+      renderCurrentSlide('left');
+    }
+
+    // Pilih Slide Langsung dari Indikator
+    function goToSlide(index) {
+      if (index === currentSlideIndex) return;
+      const dir = index > currentSlideIndex ? 'right' : 'left';
+      currentSlideIndex = index;
+      renderCurrentSlide(dir);
+    }
+
+    // Dukungan Touch Swipe (Geser Jari di HP/Layar Sentuh) & Mouse Drag
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    const mainArea = document.getElementById('mainTouchArea');
+    mainArea.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    mainArea.addEventListener('touchend', (e) => {
+      if (currentSection === 'beranda') return;
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 45) {
+        if (diff > 0) {
+          nextSlide(); // Geser ke kiri -> tampilkan slide kanan berikutnya
+        } else {
+          prevSlide(); // Geser ke kanan -> tampilkan slide kiri sebelumnya
+        }
+      }
+    }, { passive: true });
+
+    // Dukungan Tombol Panah Kiri / Kanan di Keyboard
+    window.addEventListener('keydown', (e) => {
+      if (currentSection === 'beranda') return;
+      if (e.key === 'ArrowRight') nextSlide();
+      if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    // Mode Siang & Malam (Light / Dark Mode)
+    function applyTheme(isDark) {
+      const htmlEl = document.documentElement;
+      const iconDark = document.getElementById('themeIconDark');
+      const iconLight = document.getElementById('themeIconLight');
+      const label = document.getElementById('themeLabel');
+
+      if (isDark) {
+        htmlEl.classList.add('dark');
+        iconDark.classList.add('hidden');
+        iconLight.classList.remove('hidden');
+        if (label) label.textContent = 'Siang';
+      } else {
+        htmlEl.classList.remove('dark');
+        iconDark.classList.remove('hidden');
+        iconLight.classList.add('hidden');
+        if (label) label.textContent = 'Malam';
+      }
+    }
+
+    function toggleTheme() {
+      const isCurrentlyDark = document.documentElement.classList.contains('dark');
+      const nextDark = !isCurrentlyDark;
+      localStorage.setItem('pkm_wori_theme', nextDark ? 'dark' : 'light');
+      applyTheme(nextDark);
+    }
+
+    // Modal Functions
+    function openEmergencyModal() {
+      const m = document.getElementById('emergencyModal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+    function closeEmergencyModal() {
+      const m = document.getElementById('emergencyModal');
+      m.classList.add('hidden');
+      m.classList.remove('flex');
+    }
+
+    function openComplaintModal() {
+      const m = document.getElementById('complaintModal');
+      m.classList.remove('hidden');
+      m.classList.add('flex');
+    }
+    function closeComplaintModal() {
+      const m = document.getElementById('complaintModal');
+      m.classList.add('hidden');
+      m.classList.remove('flex');
+      document.getElementById('complaintSuccess').classList.add('hidden');
+    }
+
+    function submitComplaint(e) {
+      e.preventDefault();
+      document.getElementById('complaintSuccess').classList.remove('hidden');
+      document.getElementById('complaintForm').reset();
+    }
+
+    // Right Vertical Sidebar Menu Toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      if (menu.classList.contains('hidden')) {
+        menu.classList.remove('hidden');
+        menu.classList.add('flex');
+      } else {
+        menu.classList.add('hidden');
+        menu.classList.remove('flex');
+      }
+    }
+
+    // Close modals when clicking backdrop
+    window.addEventListener('click', (e) => {
+      ['emergencyModal', 'complaintModal'].forEach(id => {
+        const el = document.getElementById(id);
+        if (e.target === el) {
+          el.classList.add('hidden');
+          el.classList.remove('flex');
+        }
+      });
+    });
+
+    // Initialize default views on load
+    document.addEventListener('DOMContentLoaded', () => {
+      const savedTheme = localStorage.getItem('pkm_wori_theme');
+      applyTheme(savedTheme === 'dark');
+      lucide.createIcons();
+      switchPage('beranda');
+    });
+  </script>
+</body>
+</html>
