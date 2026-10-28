@@ -308,7 +308,7 @@
         <div class="relative flex items-center gap-3 sm:gap-4">
           
           <!-- TOMBOL GESER KIRI (Tampil di PC/Tablet) -->
-          <button onclick="prevSlide()" aria-label="Geser ke Kiri" class="hidden sm:flex shrink-0 w-11 h-11 lg:w-12 lg:h-12 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200/90 dark:border-slate-700 shadow-soft text-slate-700 dark:text-slate-200 hover:border-blue-500 dark:hover:border-cyan-400 hover:text-blue-600 dark:hover:text-cyan-400 hover:-translate-x-0.5 items-center justify-center transition-all active:scale-95">
+          <button id="prevBtnSide" onclick="prevSlide()" aria-label="Geser ke Kiri" class="hidden sm:flex shrink-0 w-11 h-11 lg:w-12 lg:h-12 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200/90 dark:border-slate-700 shadow-soft text-slate-700 dark:text-slate-200 hover:border-blue-500 dark:hover:border-cyan-400 hover:text-blue-600 dark:hover:text-cyan-400 hover:-translate-x-0.5 items-center justify-center transition-all active:scale-95 disabled:opacity-35 disabled:pointer-events-none">
             <i data-lucide="chevron-left" class="w-5 h-5 lg:w-6 lg:h-6"></i>
           </button>
 
@@ -318,7 +318,7 @@
           </div>
 
           <!-- TOMBOL GESER KANAN (Tampil di PC/Tablet) -->
-          <button onclick="nextSlide()" aria-label="Geser ke Kanan" class="hidden sm:flex shrink-0 w-11 h-11 lg:w-12 lg:h-12 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200/90 dark:border-slate-700 shadow-soft text-slate-700 dark:text-slate-200 hover:border-blue-500 dark:hover:border-cyan-400 hover:text-blue-600 dark:hover:text-cyan-400 hover:translate-x-0.5 items-center justify-center transition-all active:scale-95">
+          <button id="nextBtnSide" onclick="nextSlide()" aria-label="Geser ke Kanan" class="hidden sm:flex shrink-0 w-11 h-11 lg:w-12 lg:h-12 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200/90 dark:border-slate-700 shadow-soft text-slate-700 dark:text-slate-200 hover:border-blue-500 dark:hover:border-cyan-400 hover:text-blue-600 dark:hover:text-cyan-400 hover:translate-x-0.5 items-center justify-center transition-all active:scale-95 disabled:opacity-35 disabled:pointer-events-none">
             <i data-lucide="chevron-right" class="w-5 h-5 lg:w-6 lg:h-6"></i>
           </button>
 
@@ -326,11 +326,11 @@
 
         <!-- TOMBOL NAVIGASI KHUSUS HP (Besar & Mudah Ditekan Jari di Bawah Kartu) -->
         <div class="grid grid-cols-2 sm:hidden items-center gap-2.5 mt-3">
-          <button onclick="prevSlide()" class="py-2.5 px-3.5 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200/90 dark:border-slate-700 shadow-soft flex items-center justify-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 active:scale-95 transition">
+          <button id="prevBtnMobile" onclick="prevSlide()" class="py-2.5 px-3.5 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200/90 dark:border-slate-700 shadow-soft flex items-center justify-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 active:scale-95 transition disabled:opacity-40 disabled:pointer-events-none">
             <i data-lucide="chevron-left" class="w-4 h-4 text-blue-600 dark:text-cyan-400 shrink-0"></i>
             <span id="prevSlideLabelMobile" class="truncate">Sebelumnya</span>
           </button>
-          <button onclick="nextSlide()" class="py-2.5 px-3.5 rounded-2xl gemini-gradient-bg shadow-soft flex items-center justify-center gap-1.5 text-xs font-bold text-white active:scale-95 transition">
+          <button id="nextBtnMobile" onclick="nextSlide()" class="py-2.5 px-3.5 rounded-2xl gemini-gradient-bg shadow-soft flex items-center justify-center gap-1.5 text-xs font-bold text-white active:scale-95 transition disabled:opacity-40 disabled:pointer-events-none">
             <span id="nextSlideLabelMobile" class="truncate">Selanjutnya</span>
             <i data-lucide="chevron-right" class="w-4 h-4 shrink-0"></i>
           </button>
@@ -339,7 +339,7 @@
         <!-- Bottom Swipe Hint & Prev/Next Labels (Desktop/Tablet - Symmetrical 3-Column Bar) -->
         <div class="hidden sm:grid sm:grid-cols-3 mt-3.5 items-center text-xs text-slate-600 dark:text-slate-300 px-14 lg:px-16">
           <div class="justify-self-start">
-            <button onclick="prevSlide()" class="inline-flex items-center gap-2 font-bold bg-white/95 dark:bg-slate-900/95 px-4 py-2 rounded-full border border-slate-200/90 dark:border-slate-700 shadow-sm hover:border-blue-400 hover:text-blue-600 dark:hover:text-cyan-400 transition">
+            <button id="prevBtnBottom" onclick="prevSlide()" class="inline-flex items-center gap-2 font-bold bg-white/95 dark:bg-slate-900/95 px-4 py-2 rounded-full border border-slate-200/90 dark:border-slate-700 shadow-sm hover:border-blue-400 hover:text-blue-600 dark:hover:text-cyan-400 transition disabled:opacity-40 disabled:pointer-events-none">
               <i data-lucide="move-left" class="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400"></i>
               <span id="prevSlideLabel">Sebelumnya</span>
             </button>
@@ -353,7 +353,7 @@
           </div>
 
           <div class="justify-self-end">
-            <button onclick="nextSlide()" class="inline-flex items-center gap-2 font-bold bg-white/95 dark:bg-slate-900/95 px-4 py-2 rounded-full border border-slate-200/90 dark:border-slate-700 shadow-sm hover:border-blue-400 hover:text-blue-600 dark:hover:text-cyan-400 transition">
+            <button id="nextBtnBottom" onclick="nextSlide()" class="inline-flex items-center gap-2 font-bold bg-white/95 dark:bg-slate-900/95 px-4 py-2 rounded-full border border-slate-200/90 dark:border-slate-700 shadow-sm hover:border-blue-400 hover:text-blue-600 dark:hover:text-cyan-400 transition disabled:opacity-40 disabled:pointer-events-none">
               <span id="nextSlideLabel">Selanjutnya</span>
               <i data-lucide="move-right" class="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400"></i>
             </button>
@@ -1234,8 +1234,11 @@
 
       const items = sectionObj.items;
       const total = items.length;
-      if (currentSlideIndex < 0) currentSlideIndex = total - 1;
-      if (currentSlideIndex >= total) currentSlideIndex = 0;
+      if (currentSlideIndex < 0) currentSlideIndex = 0;
+      if (currentSlideIndex >= total) currentSlideIndex = total - 1;
+
+      const isFirst = currentSlideIndex === 0;
+      const isLast = currentSlideIndex === total - 1;
 
       const slide = items[currentSlideIndex];
       const progressPct = Math.round(((currentSlideIndex + 1) / total) * 100);
@@ -1244,15 +1247,25 @@
       document.getElementById('sliderCategoryBadge').textContent = sectionObj.categoryTitle;
       document.getElementById('sliderCounter').textContent = `${currentSlideIndex + 1} dari ${total}`;
 
-      // Update Prev / Next Labels (Desktop & Mobile)
-      const prevIdx = (currentSlideIndex - 1 + total) % total;
-      const nextIdx = (currentSlideIndex + 1) % total;
-      document.getElementById('prevSlideLabel').textContent = items[prevIdx].shortLabel;
-      document.getElementById('nextSlideLabel').textContent = items[nextIdx].shortLabel;
+      // Update Prev / Next Labels & Stak (Non-Looping) Button States
+      const prevText = isFirst ? 'Awal Halaman' : items[currentSlideIndex - 1].shortLabel;
+      const nextText = isLast ? 'Akhir Halaman' : items[currentSlideIndex + 1].shortLabel;
+
+      document.getElementById('prevSlideLabel').textContent = prevText;
+      document.getElementById('nextSlideLabel').textContent = nextText;
       const prevMob = document.getElementById('prevSlideLabelMobile');
       const nextMob = document.getElementById('nextSlideLabelMobile');
-      if (prevMob) prevMob.textContent = items[prevIdx].shortLabel;
-      if (nextMob) nextMob.textContent = items[nextIdx].shortLabel;
+      if (prevMob) prevMob.textContent = prevText;
+      if (nextMob) nextMob.textContent = nextText;
+
+      ['prevBtnSide', 'prevBtnMobile', 'prevBtnBottom'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.disabled = isFirst;
+      });
+      ['nextBtnSide', 'nextBtnMobile', 'nextBtnBottom'].forEach(id => {
+        const btn = document.getElementById(id);
+        if (btn) btn.disabled = isLast;
+      });
 
       // Optional Action Button inside Card Footer
       let extraActionHtml = '';
@@ -1376,16 +1389,20 @@
       lucide.createIcons();
     }
 
-    // Fungsi Geser ke Kanan (Slide Berikutnya)
+    // Fungsi Geser ke Kanan (Berhenti/Stak di Slide Terakhir, Tidak Kembali ke Awal)
     function nextSlide() {
       if (currentSection === 'beranda') return;
+      const sectionObj = menuSlidesData[currentSection];
+      if (!sectionObj) return;
+      if (currentSlideIndex >= sectionObj.items.length - 1) return;
       currentSlideIndex++;
       renderCurrentSlide('right');
     }
 
-    // Fungsi Geser ke Kiri (Slide Sebelumnya)
+    // Fungsi Geser ke Kiri (Berhenti/Stak di Slide Pertama, Tidak Melompat ke Akhir)
     function prevSlide() {
       if (currentSection === 'beranda') return;
+      if (currentSlideIndex <= 0) return;
       currentSlideIndex--;
       renderCurrentSlide('left');
     }
