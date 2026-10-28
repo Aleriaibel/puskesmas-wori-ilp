@@ -131,50 +131,50 @@
 
   <!-- 1. HEADER & NAVIGASI -->
   <header class="sticky top-0 shrink-0 z-40 bg-[#f8fafd]/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-slate-200/70 dark:border-slate-800 transition-colors duration-300">
-    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-24 flex items-center justify-between gap-2 sm:gap-3">
+    <div class="w-full max-w-[1480px] mx-auto px-2.5 sm:px-5 lg:px-6 h-16 sm:h-22 flex items-center justify-between gap-2 sm:gap-3">
       
-      <!-- Brand / Identity -->
-      <button onclick="switchPage('beranda', true)" class="flex items-center gap-2.5 sm:gap-4 group text-left focus:outline-none min-w-0">
-        <img src="logo-puskesmas-wori.png?v=2" alt="Logo Puskesmas Wori" class="w-11 h-11 sm:w-16 sm:h-16 rounded-full object-contain logo-crisp group-hover:scale-105 transition-transform shrink-0" />
-        <div class="min-w-0">
+      <!-- Brand / Identity (Selalu tampil utuh secara keseluruhan, tidak pernah terpotong "...") -->
+      <button onclick="switchPage('beranda', true)" class="flex items-center gap-2 sm:gap-3.5 group text-left focus:outline-none shrink-0">
+        <img src="logo-puskesmas-wori.png?v=2" alt="Logo Puskesmas Wori" class="w-9 h-9 sm:w-14 sm:h-14 rounded-full object-contain logo-crisp group-hover:scale-105 transition-transform shrink-0" />
+        <div class="shrink-0">
           <div class="flex items-center gap-1.5 sm:gap-2">
-            <span class="uppercase font-extrabold text-sm sm:text-2xl tracking-tight gemini-gradient-text truncate">PUSKESMAS WORI</span>
-            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-teal-50 dark:bg-teal-950/80 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800 shrink-0">
+            <span class="uppercase font-extrabold text-[13px] sm:text-xl lg:text-2xl tracking-tight gemini-gradient-text whitespace-nowrap">PUSKESMAS WORI</span>
+            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-teal-50 dark:bg-teal-950/80 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800 shrink-0 whitespace-nowrap">
               ILP
             </span>
           </div>
-          <p class="text-[11px] sm:text-sm text-slate-600 dark:text-slate-400 font-semibold truncate">Kabupaten Minahasa Utara</p>
+          <p class="text-[10px] sm:text-xs lg:text-sm text-slate-600 dark:text-slate-400 font-semibold whitespace-nowrap">Kabupaten Minahasa Utara</p>
         </div>
       </button>
 
       <!-- Desktop Horizontal Navigation (Muncul otomatis di Web PC Normal, dan otomatis sembunyi saat di-zoom / di HP) -->
       <nav id="desktopHorizontalNav" class="hidden xl:flex items-center gap-1 bg-white/95 dark:bg-slate-800/95 p-1.5 rounded-full border border-slate-200/80 dark:border-slate-700 shadow-sm shrink-0">
-        <button onclick="switchPage('beranda')" data-nav="beranda" class="nav-item px-3.5 py-2 rounded-full text-xs font-bold transition">Beranda</button>
-        <button onclick="switchPage('cek-usia')" data-nav="cek-usia" class="nav-item px-3.5 py-2 rounded-full text-xs font-semibold transition">Pilih Kelompok Usia</button>
-        <button onclick="switchPage('klaster-ilp')" data-nav="klaster-ilp" class="nav-item px-3.5 py-2 rounded-full text-xs font-semibold transition">Klaster ILP</button>
-        <button onclick="switchPage('alur-pelayanan')" data-nav="alur-pelayanan" class="nav-item px-3.5 py-2 rounded-full text-xs font-semibold transition">Alur Pelayanan</button>
-        <button onclick="switchPage('jejaring-wori')" data-nav="jejaring-wori" class="nav-item px-3.5 py-2 rounded-full text-xs font-semibold transition">Jejaring Desa</button>
-        <button onclick="switchPage('kontak-lokasi')" data-nav="kontak-lokasi" class="nav-item px-3.5 py-2 rounded-full text-xs font-semibold transition">Lokasi & Jam</button>
+        <button onclick="switchPage('beranda')" data-nav="beranda" class="nav-item px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition">Beranda</button>
+        <button onclick="switchPage('cek-usia')" data-nav="cek-usia" class="nav-item px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Pilih Kelompok Usia</button>
+        <button onclick="switchPage('klaster-ilp')" data-nav="klaster-ilp" class="nav-item px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Klaster ILP</button>
+        <button onclick="switchPage('alur-pelayanan')" data-nav="alur-pelayanan" class="nav-item px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Alur Pelayanan</button>
+        <button onclick="switchPage('jejaring-wori')" data-nav="jejaring-wori" class="nav-item px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Jejaring Desa</button>
+        <button onclick="switchPage('kontak-lokasi')" data-nav="kontak-lokasi" class="nav-item px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Lokasi & Jam</button>
       </nav>
 
       <!-- Right Controls: Mode Siang/Malam + UGD 24 Jam + Tombol Menu Vertikal (Saat Zoom / HP) -->
       <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
         
         <!-- Mode Siang / Malam Toggle Button -->
-        <button onclick="toggleTheme()" id="themeToggleBtn" aria-label="Ganti Mode Siang atau Malam" title="Mode Siang / Malam" class="inline-flex items-center gap-1.5 p-2 sm:px-3 sm:py-2.5 rounded-xl sm:rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-amber-300 hover:bg-slate-100 dark:hover:bg-slate-700 shadow-sm transition text-xs font-bold">
+        <button onclick="toggleTheme()" id="themeToggleBtn" aria-label="Ganti Mode Siang atau Malam" title="Mode Siang / Malam" class="inline-flex items-center gap-1.5 p-2 sm:px-3 sm:py-2 rounded-xl sm:rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-amber-300 hover:bg-slate-100 dark:hover:bg-slate-700 shadow-sm transition text-xs font-bold whitespace-nowrap">
           <i data-lucide="moon" id="themeIconDark" class="w-4 h-4"></i>
           <i data-lucide="sun" id="themeIconLight" class="w-4 h-4 hidden"></i>
           <span id="themeLabel" class="hidden md:inline">Malam</span>
         </button>
 
         <!-- Prominent Emergency / Contact CTA -->
-        <button onclick="openEmergencyModal()" class="relative inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full font-bold text-[11px] sm:text-sm text-white bg-gradient-to-r from-rose-600 via-red-500 to-orange-500 hover:from-rose-700 hover:to-red-600 shadow-md shadow-rose-500/25 hover:shadow-lg transition-all active:scale-95">
+        <button onclick="openEmergencyModal()" class="relative inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-full font-bold text-[11px] sm:text-xs lg:text-sm text-white bg-gradient-to-r from-rose-600 via-red-500 to-orange-500 hover:from-rose-700 hover:to-red-600 shadow-md shadow-rose-500/25 hover:shadow-lg transition-all active:scale-95 whitespace-nowrap">
           <span class="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5 shrink-0">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-white"></span>
           </span>
           <i data-lucide="phone-call" class="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0"></i>
-          <span class=" sm:hidden">UGD</span>
+          <span class="sm:hidden">UGD</span>
           <span class="hidden sm:inline">UGD 24 Jam / Kontak</span>
         </button>
 
@@ -254,7 +254,7 @@
           </button>
 
           <div class="flex items-center gap-2">
-            <span id="sliderCategoryBadge" class="hero-text-halo text-xs sm:text-sm font-extrabold text-slate-900 dark:text-slate-100 truncate max-w-[160px] sm:max-w-none"></span>
+            <span id="sliderCategoryBadge" class="hero-text-halo text-xs sm:text-sm font-extrabold text-slate-900 dark:text-slate-100"></span>
             <span id="sliderCounter" class="px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/90 text-blue-700 dark:text-cyan-300 border border-blue-200 dark:border-blue-800 text-[11px] sm:text-xs font-extrabold shadow-sm shrink-0">
               1 / 6
             </span>
