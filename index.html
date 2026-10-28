@@ -50,7 +50,7 @@
     /* Background Gedung Puskesmas Wori untuk Mode Siang & Malam */
     .gemini-mesh {
       background-image: 
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.35)),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.38)),
         url('bg-puskesmas-wori.jpg');
       background-size: cover;
       background-position: center;
@@ -58,7 +58,7 @@
     }
     .dark .gemini-mesh {
       background-image: 
-        linear-gradient(to bottom, rgba(2, 6, 23, 0.55), rgba(15, 23, 42, 0.68)),
+        linear-gradient(to bottom, rgba(2, 6, 23, 0.58), rgba(15, 23, 42, 0.72)),
         url('bg-puskesmas-wori.jpg');
       background-size: cover;
       background-position: center;
@@ -93,15 +93,15 @@
     }
     /* Slide Horizontal Animation */
     .slide-enter-right {
-      animation: slideFromRight 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: slideFromRight 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .slide-enter-left {
-      animation: slideFromLeft 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: slideFromLeft 0.28s cubic-bezier(0.16, 1, 0.3, 1);
     }
     @keyframes slideFromRight {
       from {
         opacity: 0;
-        transform: translateX(48px);
+        transform: translateX(36px);
       }
       to {
         opacity: 1;
@@ -111,7 +111,7 @@
     @keyframes slideFromLeft {
       from {
         opacity: 0;
-        transform: translateX(-48px);
+        transform: translateX(-36px);
       }
       to {
         opacity: 1;
@@ -127,48 +127,59 @@
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col bg-[#f8fafd] dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-cyan-100 selection:text-cyan-900 transition-colors duration-300 select-none sm:select-auto">
+<body class="min-h-screen flex flex-col bg-[#f8fafd] dark:bg-slate-950 text-slate-900 dark:text-slate-100 antialiased selection:bg-cyan-100 selection:text-cyan-900 transition-colors duration-300">
 
   <!-- 1. HEADER & NAVIGASI -->
   <header class="sticky top-0 shrink-0 z-40 bg-[#f8fafd]/90 dark:bg-slate-900/90 backdrop-blur-xl border-b border-slate-200/70 dark:border-slate-800 transition-colors duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 sm:h-24 flex items-center justify-between gap-3">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-24 flex items-center justify-between gap-2 sm:gap-3">
       
       <!-- Brand / Identity -->
-      <button onclick="switchPage('beranda')" class="flex items-center gap-3 sm:gap-4 group text-left focus:outline-none">
-        <img src="logo-puskesmas-wori.png?v=2" alt="Logo Puskesmas Wori" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full object-contain logo-crisp group-hover:scale-105 transition-transform shrink-0" />
-        <div>
-          <div class="flex items-center gap-2">
-            <span class="uppercase font-extrabold text-lg sm:text-2xl tracking-tight gemini-gradient-text">PUSKESMAS WORI</span>
-            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-teal-50 dark:bg-teal-950/80 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
+      <button onclick="switchPage('beranda', true)" class="flex items-center gap-2.5 sm:gap-4 group text-left focus:outline-none min-w-0">
+        <img src="logo-puskesmas-wori.png?v=2" alt="Logo Puskesmas Wori" class="w-11 h-11 sm:w-16 sm:h-16 rounded-full object-contain logo-crisp group-hover:scale-105 transition-transform shrink-0" />
+        <div class="min-w-0">
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <span class="uppercase font-extrabold text-sm sm:text-2xl tracking-tight gemini-gradient-text truncate">PUSKESMAS WORI</span>
+            <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold bg-teal-50 dark:bg-teal-950/80 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800 shrink-0">
               ILP
             </span>
           </div>
-          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-semibold">Kabupaten Minahasa Utara</p>
+          <p class="text-[11px] sm:text-sm text-slate-600 dark:text-slate-400 font-semibold truncate">Kabupaten Minahasa Utara</p>
         </div>
       </button>
 
-      <!-- Right Controls: Mode Siang/Malam + UGD 24 Jam + Menu -->
-      <div class="flex items-center gap-2">
+      <!-- Desktop Horizontal Navigation (Muncul otomatis di Web PC Normal, dan otomatis sembunyi saat di-zoom / di HP) -->
+      <nav id="desktopHorizontalNav" class="hidden xl:flex items-center gap-1 bg-white/95 dark:bg-slate-800/95 p-1.5 rounded-full border border-slate-200/80 dark:border-slate-700 shadow-sm shrink-0">
+        <button onclick="switchPage('beranda')" data-nav="beranda" class="nav-item px-3.5 py-2 rounded-full text-xs font-bold transition">Beranda</button>
+        <button onclick="switchPage('cek-usia')" data-nav="cek-usia" class="nav-item px-3.5 py-2 rounded-full text-xs font-semibold transition">Pilih Kelompok Usia</button>
+        <button onclick="switchPage('klaster-ilp')" data-nav="klaster-ilp" class="nav-item px-3.5 py-2 rounded-full text-xs font-semibold transition">Klaster ILP</button>
+        <button onclick="switchPage('alur-pelayanan')" data-nav="alur-pelayanan" class="nav-item px-3.5 py-2 rounded-full text-xs font-semibold transition">Alur Pelayanan</button>
+        <button onclick="switchPage('jejaring-wori')" data-nav="jejaring-wori" class="nav-item px-3.5 py-2 rounded-full text-xs font-semibold transition">Jejaring Desa</button>
+        <button onclick="switchPage('kontak-lokasi')" data-nav="kontak-lokasi" class="nav-item px-3.5 py-2 rounded-full text-xs font-semibold transition">Lokasi & Jam</button>
+      </nav>
+
+      <!-- Right Controls: Mode Siang/Malam + UGD 24 Jam + Tombol Menu Vertikal (Saat Zoom / HP) -->
+      <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
         
         <!-- Mode Siang / Malam Toggle Button -->
-        <button onclick="toggleTheme()" id="themeToggleBtn" aria-label="Ganti Mode Siang atau Malam" title="Mode Siang / Malam" class="inline-flex items-center gap-1.5 px-3 py-2.5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-amber-300 hover:bg-slate-100 dark:hover:bg-slate-700 shadow-sm transition text-xs font-bold">
+        <button onclick="toggleTheme()" id="themeToggleBtn" aria-label="Ganti Mode Siang atau Malam" title="Mode Siang / Malam" class="inline-flex items-center gap-1.5 p-2 sm:px-3 sm:py-2.5 rounded-xl sm:rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-amber-300 hover:bg-slate-100 dark:hover:bg-slate-700 shadow-sm transition text-xs font-bold">
           <i data-lucide="moon" id="themeIconDark" class="w-4 h-4"></i>
           <i data-lucide="sun" id="themeIconLight" class="w-4 h-4 hidden"></i>
           <span id="themeLabel" class="hidden md:inline">Malam</span>
         </button>
 
         <!-- Prominent Emergency / Contact CTA -->
-        <button onclick="openEmergencyModal()" class="relative inline-flex items-center gap-2 px-3.5 sm:px-5 py-2.5 rounded-full font-bold text-xs sm:text-sm text-white bg-gradient-to-r from-rose-600 via-red-500 to-orange-500 hover:from-rose-700 hover:to-red-600 shadow-md shadow-rose-500/25 hover:shadow-lg transition-all active:scale-95">
-          <span class="relative flex h-2.5 w-2.5 shrink-0">
+        <button onclick="openEmergencyModal()" class="relative inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full font-bold text-[11px] sm:text-sm text-white bg-gradient-to-r from-rose-600 via-red-500 to-orange-500 hover:from-rose-700 hover:to-red-600 shadow-md shadow-rose-500/25 hover:shadow-lg transition-all active:scale-95">
+          <span class="relative flex h-2 w-2 sm:h-2.5 sm:w-2.5 shrink-0">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 sm:h-2.5 sm:w-2.5 bg-white"></span>
           </span>
-          <i data-lucide="phone-call" class="w-4 h-4 shrink-0"></i>
-          <span class="leading-tight text-left sm:text-center">UGD 24 Jam / Kontak</span>
+          <i data-lucide="phone-call" class="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0"></i>
+          <span class=" sm:hidden">UGD</span>
+          <span class="hidden sm:inline">UGD 24 Jam / Kontak</span>
         </button>
 
-        <!-- Menu Sidebar Button (Always on Right) -->
-        <button id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Buka Menu Navigasi" title="Menu Navigasi" class="p-2.5 rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition shadow-sm">
+        <!-- Tombol Menu Vertikal (Muncul otomatis saat Web PC di-zoom atau dibuka di HP) -->
+        <button id="mobileMenuBtn" onclick="toggleMobileMenu()" aria-label="Buka Menu Navigasi" title="Menu Navigasi" class="xl:hidden p-2 sm:p-2.5 rounded-xl sm:rounded-2xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700 transition shadow-sm">
           <i data-lucide="menu" class="w-5 h-5"></i>
         </button>
       </div>
@@ -179,154 +190,169 @@
   <div class="flex-1 flex flex-row gemini-mesh overflow-x-hidden relative">
 
     <!-- MAIN CONTAINER -->
-    <main id="mainTouchArea" class="flex-1 min-w-0 flex flex-col relative px-4 sm:px-6 lg:px-8 py-5 sm:py-8">
+    <main id="mainTouchArea" class="flex-1 min-w-0 flex flex-col relative px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
 
-    <!-- ==========================================
-         VIEW 1: BERANDA
-         ========================================== -->
-    <section id="view-beranda" class="w-full max-w-5xl mx-auto my-auto text-center">
-      <!-- Main Title -->
-      <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.15]">
-        <span class="hero-text-halo">Layanan Kesehatan Terpadu</span> <br class="hidden sm:inline" />
-        <span class="gemini-gradient-text inline-block">Setiap Siklus Kehidupan Anda</span>
-      </h1>
+      <!-- ==========================================
+           VIEW 1: BERANDA
+           ========================================== -->
+      <section id="view-beranda" class="w-full max-w-5xl mx-auto my-auto text-center py-2">
+        <!-- Main Title -->
+        <h1 class="text-2xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.2] sm:leading-[1.15]">
+          <span class="hero-text-halo">Layanan Kesehatan Terpadu</span> <br class="hidden sm:inline" />
+          <span class="gemini-gradient-text inline-block mt-0.5 sm:mt-0">Setiap Siklus Kehidupan Anda</span>
+        </h1>
 
-      <!-- Subtitle Paragraph -->
-      <p class="hero-text-halo mt-4 sm:mt-5 text-sm sm:text-lg text-slate-900 dark:text-slate-100 max-w-2xl mx-auto leading-relaxed font-body font-semibold">
-        Selamat datang di portal informasi <strong>Puskesmas Wori</strong>. Melalui program <strong>Integrasi Layanan Primer (ILP)</strong>, pelayanan kini ditata berdasarkan klaster siklus hidup—mulai dari ibu hamil, bayi, remaja, usia dewasa, hingga lansia di seluruh wilayah kerja Kecamatan Wori.
-      </p>
-       
-      <!-- 3 Key Interactive Badges -->
-      <div class="mt-7 sm:mt-9 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-        <button onclick="switchPage('klaster-ilp')" class=" flex items-center gap-3 bg-white/95 dark:bg-slate-900/95 px-5 py-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-soft hover:border-blue-400 dark:hover:border-blue-500 hover:-translate-y-0.5 transition text-left">
-          <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
-            <i data-lucide="layers" class="w-4 h-4"></i>
-          </div>
-          <div>
-            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Sistem Pelayanan</p>
-            <p class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100">4 Klaster + Lintas Klaster</p>
-          </div>
-        </button>
+        <!-- Subtitle Paragraph -->
+        <p class="hero-text-halo mt-3 sm:mt-5 text-xs sm:text-lg text-slate-900 dark:text-slate-100 max-w-2xl mx-auto leading-relaxed font-body font-semibold px-1">
+          Selamat datang di portal informasi <strong>Puskesmas Wori</strong>. Melalui program <strong>Integrasi Layanan Primer (ILP)</strong>, pelayanan kini ditata berdasarkan klaster siklus hidup—mulai dari ibu hamil, bayi, remaja, usia dewasa, hingga lansia di seluruh wilayah kerja Kecamatan Wori.
+        </p>
+         
+        <!-- 3 Key Interactive Badges (Full-width stack on HP, Row on PC) -->
+        <div class="mt-5 sm:mt-9 grid grid-cols-1 sm:flex sm:flex-wrap items-center justify-center gap-2.5 sm:gap-4 max-w-md sm:max-w-none mx-auto">
+          <button onclick="switchPage('klaster-ilp')" class="flex items-center gap-3 bg-white/95 dark:bg-slate-900/95 px-4 py-3 sm:px-5 sm:py-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-soft hover:border-blue-400 dark:hover:border-blue-500 hover:-translate-y-0.5 transition text-left">
+            <div class="w-9 h-9 rounded-xl bg-blue-50 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
+              <i data-lucide="layers" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium">Sistem Pelayanan</p>
+              <p class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100">4 Klaster + Lintas Klaster</p>
+            </div>
+          </button>
 
-        <button onclick="switchPage('jejaring-wori')" class="flex items-center gap-3 bg-white/95 dark:bg-slate-900/95 px-5 py-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-soft hover:border-teal-400 dark:hover:border-teal-500 hover:-translate-y-0.5 transition text-left">
-          <div class="w-9 h-9 rounded-xl bg-teal-50 dark:bg-teal-950/80 text-teal-600 dark:text-teal-400 flex items-center justify-center shrink-0">
-            <i data-lucide="compass" class="w-4 h-4"></i>
-          </div>
-          <div>
-            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Cakupan Wilayah Kerja</p>
-            <p class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100">13 Desa Kecamatan Wori</p>
-          </div>
-        </button>
+          <button onclick="switchPage('jejaring-wori')" class="flex items-center gap-3 bg-white/95 dark:bg-slate-900/95 px-4 py-3 sm:px-5 sm:py-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-soft hover:border-teal-400 dark:hover:border-teal-500 hover:-translate-y-0.5 transition text-left">
+            <div class="w-9 h-9 rounded-xl bg-teal-50 dark:bg-teal-950/80 text-teal-600 dark:text-teal-400 flex items-center justify-center shrink-0">
+              <i data-lucide="compass" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium">Cakupan Wilayah Kerja</p>
+              <p class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100">13 Desa Kecamatan Wori</p>
+            </div>
+          </button>
 
-        <button onclick="switchPage('cek-usia')" class="flex items-center gap-3 bg-white/95 dark:bg-slate-900/95 px-5 py-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-soft hover:border-cyan-400 dark:hover:border-cyan-500 hover:-translate-y-0.5 transition text-left">
-          <div class="w-9 h-9 rounded-xl bg-cyan-50 dark:bg-cyan-950/80 text-cyan-600 dark:text-cyan-400 flex items-center justify-center shrink-0">
-            <i data-lucide="shield-check" class="w-4 h-4"></i>
-          </div>
-          <div>
-            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Skrining Kesehatan</p>
-            <p class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100">Gratis Bagi Peserta JKN/KTP</p>
-          </div>
-        </button>
-      </div>
-    </section>
-
-    <!-- ==========================================
-         UNIVERSAL HORIZONTAL SLIDER VIEW (FOR ALL MENUS)
-         ========================================== -->
-    <section id="view-slider" class="hidden w-full max-w-5xl mx-auto my-auto flex flex-col">
-      
-      <!-- Top Bar: Back Button + Section Title + Slide Counter -->
-      <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
-        <button onclick="switchPage('beranda')" class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-bold text-blue-600 dark:text-cyan-400 shadow-sm hover:bg-slate-50 transition">
-          <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
-          <span>Beranda</span>
-        </button>
-
-        <div class="flex items-center gap-2">
-          <span id="sliderCategoryBadge" class="hero-text-halo text-xs sm:text-sm font-extrabold text-slate-900 dark:text-slate-100"></span>
-          <span id="sliderCounter" class="px-3 py-1 rounded-full bg-blue-50 dark:bg-blue-950/90 text-blue-700 dark:text-cyan-300 border border-blue-200 dark:border-blue-800 text-xs font-extrabold shadow-sm">
-            1 / 6
-          </span>
+          <button onclick="switchPage('cek-usia')" class="flex items-center gap-3 bg-white/95 dark:bg-slate-900/95 px-4 py-3 sm:px-5 sm:py-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 shadow-soft hover:border-cyan-400 dark:hover:border-cyan-500 hover:-translate-y-0.5 transition text-left">
+            <div class="w-9 h-9 rounded-xl bg-cyan-50 dark:bg-cyan-950/80 text-cyan-600 dark:text-cyan-400 flex items-center justify-center shrink-0">
+              <i data-lucide="shield-check" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <p class="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium">Skrining Kesehatan</p>
+              <p class="text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100">Gratis Bagi Peserta JKN/KTP</p>
+            </div>
+          </button>
         </div>
-      </div>
+      </section>
 
-      <!-- Horizontal Quick Indicator Pills (Scrollable Left-Right) -->
-      <div id="sliderPills" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-2 px-1 mb-1">
-        <!-- Populated dynamically -->
-      </div>
-
-      <!-- Main Slide Stage with Left & Right Arrow Buttons -->
-      <div class="relative flex items-center gap-2 sm:gap-4">
+      <!-- ==========================================
+           UNIVERSAL HORIZONTAL SLIDER VIEW (FOR ALL MENUS)
+           ========================================== -->
+      <section id="view-slider" class="hidden w-full max-w-5xl mx-auto my-auto flex flex-col">
         
-        <!-- TOMBOL GESER KIRI (PREV) -->
-        <button onclick="prevSlide()" aria-label="Geser ke Kiri" class="shrink-0 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500 dark:hover:border-cyan-400 hover:text-blue-600 dark:hover:text-cyan-400 shadow-soft flex items-center justify-center transition active:scale-90">
-          <i data-lucide="chevron-left" class="w-6 h-6 sm:w-7 sm:h-7"></i>
-        </button>
+        <!-- Top Bar: Back Button + Section Title + Slide Counter -->
+        <div class="flex items-center justify-between gap-2 mb-2">
+          <button onclick="switchPage('beranda')" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-bold text-blue-600 dark:text-cyan-400 shadow-sm hover:bg-slate-50 transition">
+            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+            <span>Beranda</span>
+          </button>
 
-        <!-- ACTIVE SLIDE CARD CONTAINER -->
-        <div id="slideCardViewport" class="flex-1 min-w-0">
-          <!-- Single Active Card Rendered Here -->
+          <div class="flex items-center gap-2">
+            <span id="sliderCategoryBadge" class="hero-text-halo text-xs sm:text-sm font-extrabold text-slate-900 dark:text-slate-100 truncate max-w-[160px] sm:max-w-none"></span>
+            <span id="sliderCounter" class="px-2.5 py-1 rounded-full bg-blue-50 dark:bg-blue-950/90 text-blue-700 dark:text-cyan-300 border border-blue-200 dark:border-blue-800 text-[11px] sm:text-xs font-extrabold shadow-sm shrink-0">
+              1 / 6
+            </span>
+          </div>
         </div>
 
-        <!-- TOMBOL GESER KANAN (NEXT) -->
-        <button onclick="nextSlide()" aria-label="Geser ke Kanan" class="shrink-0 w-11 h-11 sm:w-14 sm:h-14 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500 dark:hover:border-cyan-400 hover:text-blue-600 dark:hover:text-cyan-400 shadow-soft flex items-center justify-center transition active:scale-90">
-          <i data-lucide="chevron-right" class="w-6 h-6 sm:w-7 sm:h-7"></i>
-        </button>
+        <!-- Horizontal Quick Indicator Pills (Scrollable Left-Right) -->
+        <div id="sliderPills" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-2 px-1 mb-1">
+          <!-- Populated dynamically -->
+        </div>
 
-      </div>
+        <!-- Main Slide Stage: Full Width on HP, Side Arrows on Tablet/PC -->
+        <div class="relative flex items-center gap-3 sm:gap-4">
+          
+          <!-- TOMBOL GESER KIRI (Tampil di PC/Tablet) -->
+          <button onclick="prevSlide()" aria-label="Geser ke Kiri" class="hidden sm:flex shrink-0 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500 dark:hover:border-cyan-400 hover:text-blue-600 dark:hover:text-cyan-400 shadow-soft items-center justify-center transition active:scale-90">
+            <i data-lucide="chevron-left" class="w-6 h-6 lg:w-7 lg:h-7"></i>
+          </button>
 
-      <!-- Bottom Swipe Hint & Prev/Next Labels -->
-      <div class="mt-3.5 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 px-2">
-        <button onclick="prevSlide()" class="inline-flex items-center gap-1 font-semibold hover:text-blue-600 dark:hover:text-cyan-400 transition">
-          <i data-lucide="move-left" class="w-3.5 h-3.5"></i>
-          <span id="prevSlideLabel">Sebelumnya</span>
-        </button>
+          <!-- ACTIVE SLIDE CARD CONTAINER (100% Lebar Penuh di HP) -->
+          <div id="slideCardViewport" class="flex-1 min-w-0 w-full">
+            <!-- Single Active Card Rendered Here -->
+          </div>
 
-        <span class="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-medium bg-white/80 dark:bg-slate-900/80 px-3 py-1 rounded-full border border-slate-200/70 dark:border-slate-800">
-          <i data-lucide="move-horizontal" class="w-3.5 h-3.5 text-cyan-500"></i>
-          Geser layar ke kiri / kanan atau klik panah
-        </span>
+          <!-- TOMBOL GESER KANAN (Tampil di PC/Tablet) -->
+          <button onclick="nextSlide()" aria-label="Geser ke Kanan" class="hidden sm:flex shrink-0 w-12 h-12 lg:w-14 lg:h-14 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:border-blue-500 dark:hover:border-cyan-400 hover:text-blue-600 dark:hover:text-cyan-400 shadow-soft items-center justify-center transition active:scale-90">
+            <i data-lucide="chevron-right" class="w-6 h-6 lg:w-7 lg:h-7"></i>
+          </button>
 
-        <button onclick="nextSlide()" class="inline-flex items-center gap-1 font-semibold hover:text-blue-600 dark:hover:text-cyan-400 transition">
-          <span id="nextSlideLabel">Selanjutnya</span>
-          <i data-lucide="move-right" class="w-3.5 h-3.5"></i>
-        </button>
-      </div>
+        </div>
 
-    </section>
+        <!-- TOMBOL NAVIGASI KHUSUS HP (Besar & Mudah Ditekan Jari di Bawah Kartu) -->
+        <div class="flex sm:hidden items-center justify-between gap-2.5 mt-3">
+          <button onclick="prevSlide()" class="flex-1 py-2.5 px-3 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200 dark:border-slate-700 shadow-soft flex items-center justify-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 active:scale-95 transition">
+            <i data-lucide="chevron-left" class="w-4 h-4 text-blue-600 dark:text-cyan-400 shrink-0"></i>
+            <span id="prevSlideLabelMobile" class="truncate">Sebelumnya</span>
+          </button>
+          <button onclick="nextSlide()" class="flex-1 py-2.5 px-3 rounded-2xl gemini-gradient-bg shadow-soft flex items-center justify-center gap-1.5 text-xs font-bold text-white active:scale-95 transition">
+            <span id="nextSlideLabelMobile" class="truncate">Selanjutnya</span>
+            <i data-lucide="chevron-right" class="w-4 h-4 shrink-0"></i>
+          </button>
+        </div>
 
-  </main>
+        <!-- Bottom Swipe Hint & Prev/Next Labels (Desktop/Tablet) -->
+        <div class="hidden sm:flex mt-3.5 items-center justify-between text-xs text-slate-700 dark:text-slate-300 px-2">
+          <button onclick="prevSlide()" class="inline-flex items-center gap-1 font-bold bg-white/85 dark:bg-slate-900/85 px-3 py-1.5 rounded-full border border-slate-200/70 dark:border-slate-800 hover:text-blue-600 dark:hover:text-cyan-400 transition">
+            <i data-lucide="move-left" class="w-3.5 h-3.5"></i>
+            <span id="prevSlideLabel">Sebelumnya</span>
+          </button>
 
-    <!-- VERTICAL NAVIGATION MENU AT RIGHT SIDE (DOES NOT OVERLAP MAIN CONTENT) -->
-    <aside id="mobileMenu" class="hidden w-60 sm:w-68 shrink-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-l border-slate-200/80 dark:border-slate-800 p-4 shadow-xl flex-col gap-2 z-30">
-      <div class="flex items-center justify-between pb-2.5 mb-1 border-b border-slate-100 dark:border-slate-800">
-        <span class="text-xs font-extrabold uppercase tracking-wider text-slate-400">Menu Navigasi</span>
-        <button onclick="toggleMobileMenu()" aria-label="Tutup Menu" class="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+          <span class="inline-flex items-center gap-1.5 text-[11px] font-semibold bg-white/85 dark:bg-slate-900/85 px-3.5 py-1.5 rounded-full border border-slate-200/70 dark:border-slate-800">
+            <i data-lucide="move-horizontal" class="w-3.5 h-3.5 text-cyan-500"></i>
+            Geser layar ke kiri / kanan atau klik panah
+          </span>
+
+          <button onclick="nextSlide()" class="inline-flex items-center gap-1 font-bold bg-white/85 dark:bg-slate-900/85 px-3 py-1.5 rounded-full border border-slate-200/70 dark:border-slate-800 hover:text-blue-600 dark:hover:text-cyan-400 transition">
+            <span id="nextSlideLabel">Selanjutnya</span>
+            <i data-lucide="move-right" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- VERTICAL NAVIGATION MENU AT RIGHT SIDE:
+         - Otomatis sembunyi di Web PC Normal (xl:!hidden) karena sudah ada Navbar Horizontal di atas.
+         - Saat Web PC di-zoom (md s/d xl): tampil di sebelah kanan berdampingan tanpa menutupi teks layar utama.
+         - Saat dibuka di HP (< md): tampil rapi sebagai kartu vertikal di sisi kanan layar. -->
+    <aside id="mobileMenu" class="hidden xl:!hidden fixed md:static right-3 top-[4.25rem] w-60 sm:w-64 shrink-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl rounded-3xl md:rounded-none border border-slate-200/90 md:border-y-0 md:border-r-0 md:border-l dark:border-slate-800 p-3.5 sm:p-4 shadow-2xl md:shadow-xl flex-col gap-1.5 z-50">
+      <div class="flex items-center justify-between pb-2 mb-1 border-b border-slate-100 dark:border-slate-800">
+        <span class="text-[11px] font-extrabold uppercase tracking-wider text-slate-400">Menu Navigasi</span>
+        <button onclick="toggleMobileMenu()" aria-label="Tutup Menu" class="p-1 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
           <i data-lucide="x" class="w-4 h-4"></i>
         </button>
       </div>
 
-      <button onclick="switchPage('beranda', false)" data-nav-mobile="beranda" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
+      <button onclick="handleMenuClick('beranda')" data-nav-mobile="beranda" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
         <i data-lucide="home" class="w-4 h-4 text-blue-500 shrink-0"></i>
         <span>Beranda</span>
       </button>
-      <button onclick="switchPage('cek-usia', false)" data-nav-mobile="cek-usia" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
+      <button onclick="handleMenuClick('cek-usia')" data-nav-mobile="cek-usia" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
         <i data-lucide="users" class="w-4 h-4 text-cyan-500 shrink-0"></i>
         <span>Pilih Kelompok Usia</span>
       </button>
-      <button onclick="switchPage('klaster-ilp', false)" data-nav-mobile="klaster-ilp" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
+      <button onclick="handleMenuClick('klaster-ilp')" data-nav-mobile="klaster-ilp" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
         <i data-lucide="layers" class="w-4 h-4 text-teal-500 shrink-0"></i>
         <span>Klaster ILP</span>
       </button>
-      <button onclick="switchPage('alur-pelayanan', false)" data-nav-mobile="alur-pelayanan" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
+      <button onclick="handleMenuClick('alur-pelayanan')" data-nav-mobile="alur-pelayanan" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
         <i data-lucide="git-branch" class="w-4 h-4 text-indigo-500 shrink-0"></i>
         <span>Alur Pelayanan Pasien</span>
       </button>
-      <button onclick="switchPage('jejaring-wori', false)" data-nav-mobile="jejaring-wori" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
+      <button onclick="handleMenuClick('jejaring-wori')" data-nav-mobile="jejaring-wori" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
         <i data-lucide="map" class="w-4 h-4 text-emerald-500 shrink-0"></i>
         <span>Jejaring 13 Desa Wori</span>
       </button>
-      <button onclick="switchPage('kontak-lokasi', false)" data-nav-mobile="kontak-lokasi" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
+      <button onclick="handleMenuClick('kontak-lokasi')" data-nav-mobile="kontak-lokasi" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
         <i data-lucide="clock" class="w-4 h-4 text-rose-500 shrink-0"></i>
         <span>Lokasi & Jam Pelayanan</span>
       </button>
@@ -336,50 +362,50 @@
 
   <!-- MODAL 1: UGD 24 JAM & KONTAK DARURAT -->
   <div id="emergencyModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
-    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-800 relative">
-      <button onclick="closeEmergencyModal()" aria-label="Tutup" class="absolute top-5 right-5 p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-5 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-800 relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeEmergencyModal()" aria-label="Tutup" class="absolute top-4 right-4 p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
 
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 text-xs font-bold mb-4">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 dark:bg-rose-950/80 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 text-xs font-bold mb-3">
         <span class="w-2 h-2 rounded-full bg-rose-600 animate-ping"></span>
         LAYANAN SIAGA 24 JAM
       </div>
 
-      <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white">UGD 24 Jam & Persalinan Puskesmas Wori</h3>
-      <p class="text-sm text-slate-600 dark:text-slate-300 mt-2">
+      <h3 class="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white">UGD 24 Jam & Persalinan Puskesmas Wori</h3>
+      <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-2">
         Unit Gawat Darurat (UGD) dan Ruang Persalinan (PONED) Puskesmas Wori siap melayani kasus gawat darurat medis, kecelakaan, serta persalinan 24 jam penuh termasuk hari Minggu & Libur Nasional.
       </p>
 
-      <div class="mt-6 space-y-3">
-        <a href="tel:119" class="flex items-center justify-between p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 hover:bg-rose-100 transition">
-          <div class="flex items-center gap-3.5">
-            <div class="w-10 h-10 rounded-xl bg-rose-600 text-white flex items-center justify-center">
+      <div class="mt-5 space-y-3">
+        <a href="tel:119" class="flex items-center justify-between p-3.5 sm:p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-800 hover:bg-rose-100 transition">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-rose-600 text-white flex items-center justify-center shrink-0">
               <i data-lucide="phone-call" class="w-5 h-5"></i>
             </div>
             <div>
-              <p class="text-xs font-bold uppercase text-rose-700 dark:text-rose-300">Panggilan Darurat Medis / PSC</p>
-              <p class="text-base font-extrabold text-slate-900 dark:text-white">119 / 0811-4300-911</p>
+              <p class="text-[11px] font-bold uppercase text-rose-700 dark:text-rose-300">Panggilan Darurat Medis / PSC</p>
+              <p class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">119 / 0811-4300-911</p>
             </div>
           </div>
-          <span class="text-xs font-bold text-rose-700 bg-white px-3 py-1.5 rounded-xl border border-rose-200">Hubungi</span>
+          <span class="text-xs font-bold text-rose-700 bg-white px-3 py-1.5 rounded-xl border border-rose-200 shrink-0">Hubungi</span>
         </a>
 
-        <a href="https://wa.me/6282190007654?text=Halo%20Petugas%20Puskesmas%20Wori,%20saya%20ingin%20menanyakan%20informasi%20layanan%20ILP" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-2xl bg-teal-50 dark:bg-teal-950/50 border border-teal-200 dark:border-teal-800 hover:bg-teal-100 transition">
-          <div class="flex items-center gap-3.5">
-            <div class="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center">
+        <a href="https://wa.me/6282190007654?text=Halo%20Petugas%20Puskesmas%20Wori,%20saya%20ingin%20menanyakan%20informasi%20layanan%20ILP" target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-3.5 sm:p-4 rounded-2xl bg-teal-50 dark:bg-teal-950/50 border border-teal-200 dark:border-teal-800 hover:bg-teal-100 transition">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-teal-600 text-white flex items-center justify-center shrink-0">
               <i data-lucide="message-circle" class="w-5 h-5"></i>
             </div>
             <div>
-              <p class="text-xs font-bold uppercase text-teal-700 dark:text-teal-300">WhatsApp Informasi & Pengaduan</p>
-              <p class="text-base font-extrabold text-slate-900 dark:text-white">0821-9000-7654</p>
+              <p class="text-[11px] font-bold uppercase text-teal-700 dark:text-teal-300">WhatsApp Informasi & Pengaduan</p>
+              <p class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white">0821-9000-7654</p>
             </div>
           </div>
-          <span class="text-xs font-bold text-teal-700 bg-white px-3 py-1.5 rounded-xl border border-teal-200">Chat WA</span>
+          <span class="text-xs font-bold text-teal-700 bg-white px-3 py-1.5 rounded-xl border border-teal-200 shrink-0">Chat WA</span>
         </a>
       </div>
 
-      <div class="mt-6 p-4 rounded-2xl bg-[#f8fafd] dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-600 dark:text-slate-300 space-y-1.5">
+      <div class="mt-5 p-3.5 sm:p-4 rounded-2xl bg-[#f8fafd] dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-600 dark:text-slate-300 space-y-1">
         <p class="font-bold text-slate-800 dark:text-white">Persyaratan Dokumen Kunjungan:</p>
         <p>• Pasien Gawat Darurat langsung ditangani <strong>tanpa harus antre loket</strong>.</p>
         <p>• Mohon membawa KTP / Kartu Keluarga / Kartu BPJS Kesehatan / Buku KIA (bagi ibu hamil & balita).</p>
@@ -389,8 +415,8 @@
 
   <!-- MODAL 2: FORM PENGADUAN & SARAN MASYARAKAT -->
   <div id="complaintModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
-    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-800 relative">
-      <button onclick="closeComplaintModal()" aria-label="Tutup" class="absolute top-5 right-5 p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-5 sm:p-8 shadow-2xl border border-slate-200 dark:border-slate-800 relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeComplaintModal()" aria-label="Tutup" class="absolute top-4 right-4 p-2 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
 
@@ -402,7 +428,7 @@
         Masukan Anda sangat berharga bagi peningkatan kualitas layanan Puskesmas Wori.
       </p>
 
-      <form id="complaintForm" onsubmit="submitComplaint(event)" class="mt-5 space-y-4">
+      <form id="complaintForm" onsubmit="submitComplaint(event)" class="mt-4 space-y-3.5">
         <div>
           <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">Nama Lengkap & Desa Asal</label>
           <input type="text" id="compName" required placeholder="Contoh: Ibu Maria - Desa Tiwoho" class="w-full px-4 py-2.5 rounded-2xl bg-[#f8fafd] dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-sm text-slate-900 dark:text-white focus:outline-none focus:border-cyan-500" />
@@ -432,14 +458,14 @@
     </div>
   </div>
 
-  <!-- VANILLA JAVASCRIPT: HORIZONTAL SLIDE ENGINE FOR ALL MENUS -->
+  <!-- VANILLA JAVASCRIPT: HORIZONTAL SLIDE ENGINE & ADAPTIVE NAVIGATION -->
   <script>
     let currentSection = 'beranda';
     let currentSlideIndex = 0;
 
     // SEMUA DATA SLIDE UNTUK SETIAP MENU NAVIGASI
     const menuSlidesData = {
-      // 1. MENU KELOMPOK USIA (Pertama muncul: Ibu Hamil & Nifas, geser kanan untuk Bayi & Balita, dst.)
+      // 1. MENU KELOMPOK USIA
       'cek-usia': {
         categoryTitle: 'Pilih Kelompok Usia',
         items: [
@@ -1085,6 +1111,14 @@
       }
     };
 
+    // Klik Menu dari Panel Vertikal Kanan:
+    // Di layar HP (< 768px) otomatis menutup menu setelah dipilih agar konten tampil penuh.
+    // Di layar PC saat di-zoom (>= 768px) tetap tampil vertikal di kanan berdampingan dengan konten.
+    function handleMenuClick(pageId) {
+      const isMobilePhone = window.innerWidth < 768;
+      switchPage(pageId, isMobilePhone);
+    }
+
     // Fungsi Berpindah Menu Navigasi Utama
     function switchPage(pageId, closeDrawer = false) {
       currentSection = pageId;
@@ -1098,11 +1132,11 @@
       } else {
         berandaEl.classList.add('hidden');
         sliderEl.classList.remove('hidden');
-        currentSlideIndex = 0; // Selalu mulai dari item pertama (misal: Ibu Hamil & Nifas)
+        currentSlideIndex = 0;
         renderCurrentSlide('right');
       }
 
-      // Highlight active menu on desktop
+      // Highlight active menu on desktop horizontal bar
       document.querySelectorAll('.nav-item').forEach(btn => {
         if (btn.dataset.nav === pageId) {
           btn.className = "nav-item px-3.5 py-2 rounded-full text-xs font-bold gemini-gradient-bg text-white shadow-sm transition";
@@ -1111,17 +1145,19 @@
         }
       });
 
-      // Highlight active menu on mobile drawer
+      // Highlight active menu on right vertical menu
       document.querySelectorAll('.mobile-nav-item').forEach(btn => {
         if (btn.dataset.navMobile === pageId) {
-          btn.className = "mobile-nav-item flex items-center gap-3 w-full text-left px-4 py-3 rounded-2xl text-sm font-bold bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-cyan-400 border border-blue-200 dark:border-slate-700 transition";
+          btn.className = "mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-bold bg-blue-50 dark:bg-slate-800 text-blue-600 dark:text-cyan-400 border border-blue-200 dark:border-slate-700 transition";
         } else {
-          btn.className = "mobile-nav-item flex items-center gap-3 w-full text-left px-4 py-3 rounded-2xl text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition";
+          btn.className = "mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition";
         }
       });
 
       if (closeDrawer) {
-        document.getElementById('mobileMenu').classList.add('hidden');
+        const menu = document.getElementById('mobileMenu');
+        menu.classList.add('hidden');
+        menu.classList.remove('flex');
       }
     }
 
@@ -1146,10 +1182,10 @@
       pillsContainer.innerHTML = items.map((it, idx) => {
         const isActive = idx === currentSlideIndex;
         return `
-          <button onclick="goToSlide(${idx})" id="pill-btn-${idx}" class="shrink-0 px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
+          <button onclick="goToSlide(${idx})" id="pill-btn-${idx}" class="shrink-0 px-3 sm:px-3.5 py-1.5 rounded-full text-[11px] sm:text-xs font-bold transition-all ${
             isActive
-              ? 'gemini-gradient-bg text-white shadow-sm scale-105'
-              : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300 border border-slate-200/90 dark:border-slate-800 hover:border-cyan-400'
+              ? 'gemini-gradient-bg text-white shadow-sm'
+              : 'bg-white/95 dark:bg-slate-900/95 text-slate-700 dark:text-slate-300 border border-slate-200/90 dark:border-slate-800 hover:border-cyan-400'
           }">
             ${it.shortLabel}
           </button>
@@ -1162,18 +1198,22 @@
         activePillEl.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
 
-      // Update Prev / Next Labels at Bottom
+      // Update Prev / Next Labels (Desktop & Mobile)
       const prevIdx = (currentSlideIndex - 1 + total) % total;
       const nextIdx = (currentSlideIndex + 1) % total;
       document.getElementById('prevSlideLabel').textContent = items[prevIdx].shortLabel;
       document.getElementById('nextSlideLabel').textContent = items[nextIdx].shortLabel;
+      const prevMob = document.getElementById('prevSlideLabelMobile');
+      const nextMob = document.getElementById('nextSlideLabelMobile');
+      if (prevMob) prevMob.textContent = items[prevIdx].shortLabel;
+      if (nextMob) nextMob.textContent = items[nextIdx].shortLabel;
 
-      // Optional Action Button inside Card (e.g., Google Maps or Kotak Saran)
+      // Optional Action Button inside Card
       let extraActionHtml = '';
       if (slide.actionType === 'maps') {
         extraActionHtml = `
-          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-end">
-            <a href="https://maps.google.com/?q=Puskesmas+Wori+Minahasa+Utara" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl gemini-gradient-bg text-white text-xs font-bold shadow-sm hover:opacity-95 transition">
+          <div class="mt-3.5 pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-end">
+            <a href="https://maps.google.com/?q=Puskesmas+Wori+Minahasa+Utara" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto justify-center inline-flex items-center gap-2 px-4 py-2.5 rounded-xl gemini-gradient-bg text-white text-xs font-bold shadow-sm hover:opacity-95 transition">
               <i data-lucide="map" class="w-4 h-4"></i>
               <span>Buka Lokasi di Google Maps</span>
             </a>
@@ -1181,8 +1221,8 @@
         `;
       } else if (slide.actionType === 'complaint') {
         extraActionHtml = `
-          <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-end">
-            <button onclick="openComplaintModal()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl gemini-gradient-bg text-white text-xs font-bold shadow-sm hover:opacity-95 transition">
+          <div class="mt-3.5 pt-3 border-t border-slate-100 dark:border-slate-800 flex justify-end">
+            <button onclick="openComplaintModal()" class="w-full sm:w-auto justify-center inline-flex items-center gap-2 px-4 py-2.5 rounded-xl gemini-gradient-bg text-white text-xs font-bold shadow-sm hover:opacity-95 transition">
               <i data-lucide="send" class="w-4 h-4"></i>
               <span>Buka Formulir Saran / Pengaduan Online</span>
             </button>
@@ -1190,24 +1230,24 @@
         `;
       }
 
-      // Render Single Card inside Viewport with Slide Left/Right Animation
+      // Render Single Card inside Viewport
       const animClass = direction === 'left' ? 'slide-enter-left' : 'slide-enter-right';
       const viewport = document.getElementById('slideCardViewport');
       viewport.innerHTML = `
-        <article class="${animClass} bg-white dark:bg-slate-900 rounded-3xl p-5 sm:p-8 shadow-soft-lg border border-slate-200/90 dark:border-slate-800 relative overflow-hidden">
+        <article class="${animClass} bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-3xl p-4 sm:p-7 shadow-soft-lg border border-slate-200/90 dark:border-slate-800 relative overflow-hidden">
           <!-- Top Gradient Accent Bar -->
           <div class="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r ${slide.accent}"></div>
 
           <!-- Card Header -->
-          <div class="flex items-start justify-between gap-4">
+          <div class="flex items-start justify-between gap-3">
             <div>
-              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold bg-cyan-50 dark:bg-cyan-950/80 text-cyan-800 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">
+              <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-[11px] font-extrabold bg-cyan-50 dark:bg-cyan-950/80 text-cyan-800 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-800">
                 ${slide.badge}
               </span>
-              <h2 class="mt-2.5 text-xl sm:text-3xl font-extrabold text-slate-900 dark:text-white leading-tight">
+              <h2 class="mt-2 text-lg sm:text-3xl font-extrabold text-slate-900 dark:text-white leading-snug">
                 ${slide.title}
               </h2>
-              <p class="mt-1.5 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-body">
+              <p class="mt-1 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-body">
                 ${slide.subtitle}
               </p>
             </div>
@@ -1217,21 +1257,21 @@
           </div>
 
           <!-- Meta Info Boxes (2 Columns) -->
-          <div class="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3">
-            <div class="p-3 sm:p-3.5 rounded-2xl bg-[#f8fafd] dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700">
-              <p class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400">${slide.metaLeftLabel}</p>
+          <div class="mt-3.5 grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
+            <div class="p-2.5 sm:p-3.5 rounded-2xl bg-[#f8fafd] dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700">
+              <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">${slide.metaLeftLabel}</p>
               <p class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white mt-0.5">${slide.metaLeftValue}</p>
             </div>
-            <div class="p-3 sm:p-3.5 rounded-2xl bg-[#f8fafd] dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700">
-              <p class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400">${slide.metaRightLabel}</p>
+            <div class="p-2.5 sm:p-3.5 rounded-2xl bg-[#f8fafd] dark:bg-slate-800/90 border border-slate-200/80 dark:border-slate-700">
+              <p class="text-[10px] font-bold uppercase tracking-wider text-slate-400">${slide.metaRightLabel}</p>
               <p class="text-xs sm:text-sm font-bold text-slate-900 dark:text-white mt-0.5">${slide.metaRightValue}</p>
             </div>
           </div>
 
           <!-- Points List -->
-          <div class="mt-4 pt-4 border-t border-slate-100 dark:border-slate-800">
-            <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2.5">${slide.pointsTitle}</p>
-            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
+          <div class="mt-3.5 pt-3.5 border-t border-slate-100 dark:border-slate-800">
+            <p class="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">${slide.pointsTitle}</p>
+            <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2">
               ${slide.points.map(pt => `
                 <li class="flex items-start gap-2 text-xs sm:text-sm text-slate-700 dark:text-slate-200 leading-snug">
                   <i data-lucide="check-circle-2" class="w-4 h-4 text-teal-600 dark:text-teal-400 shrink-0 mt-0.5"></i>
@@ -1270,7 +1310,7 @@
       renderCurrentSlide(dir);
     }
 
-    // Dukungan Touch Swipe (Geser Jari di HP/Layar Sentuh) & Mouse Drag
+    // Dukungan Touch Swipe (Geser Jari di HP/Layar Sentuh)
     let touchStartX = 0;
     let touchEndX = 0;
 
@@ -1283,11 +1323,11 @@
       if (currentSection === 'beranda') return;
       touchEndX = e.changedTouches[0].screenX;
       const diff = touchStartX - touchEndX;
-      if (Math.abs(diff) > 45) {
+      if (Math.abs(diff) > 40) {
         if (diff > 0) {
-          nextSlide(); // Geser ke kiri -> tampilkan slide kanan berikutnya
+          nextSlide();
         } else {
-          prevSlide(); // Geser ke kanan -> tampilkan slide kiri sebelumnya
+          prevSlide();
         }
       }
     }, { passive: true });
@@ -1297,6 +1337,24 @@
       if (currentSection === 'beranda') return;
       if (e.key === 'ArrowRight') nextSlide();
       if (e.key === 'ArrowLeft') prevSlide();
+    });
+
+    // Otomatis tampilkan Menu Vertikal di Kanan ketika Web PC di-zoom (lebar viewport mengecil di bawah 1280px pada layar desktop/tablet >= 768px)
+    let wasDesktopWide = window.innerWidth >= 1280;
+    window.addEventListener('resize', () => {
+      const w = window.innerWidth;
+      const menu = document.getElementById('mobileMenu');
+      if (w >= 1280) {
+        // Kembali ke ukuran PC normal -> sembunyikan menu vertikal karena navbar horizontal sudah tampil
+        menu.classList.add('hidden');
+        menu.classList.remove('flex');
+        wasDesktopWide = true;
+      } else if (w >= 768 && wasDesktopWide) {
+        // Web PC sedang di-zoom -> otomatis munculkan menu vertikal di sebelah kanan
+        menu.classList.remove('hidden');
+        menu.classList.add('flex');
+        wasDesktopWide = false;
+      }
     });
 
     // Mode Siang & Malam (Light / Dark Mode)
