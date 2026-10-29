@@ -148,13 +148,10 @@
       </button>
 
       <!-- Desktop Horizontal Navigation (Muncul otomatis di Web PC Normal, dan otomatis sembunyi saat di-zoom / di HP) -->
-      <nav id="desktopHorizontalNav" class="hidden xl:flex items-center gap-1 bg-white/95 dark:bg-slate-800/95 p-1.5 rounded-full border border-slate-200/80 dark:border-slate-700 shadow-sm shrink-0">
-        <button onclick="switchPage('beranda')" data-nav="beranda" class="nav-item px-3 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition">Beranda</button>
-        <button onclick="switchPage('cek-usia')" data-nav="cek-usia" class="nav-item px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Pilih Kelompok Usia</button>
-        <button onclick="switchPage('klaster-ilp')" data-nav="klaster-ilp" class="nav-item px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Klaster ILP</button>
-        <button onclick="switchPage('alur-pelayanan')" data-nav="alur-pelayanan" class="nav-item px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Alur Pelayanan</button>
-        <button onclick="switchPage('jejaring-wori')" data-nav="jejaring-wori" class="nav-item px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Jejaring Desa</button>
-        <button onclick="switchPage('kontak-lokasi')" data-nav="kontak-lokasi" class="nav-item px-3 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Lokasi & Jam</button>
+      <nav id="desktopHorizontalNav" class="hidden xl:flex items-center gap-1.5 bg-white/95 dark:bg-slate-800/95 p-1.5 rounded-full border border-slate-200/80 dark:border-slate-700 shadow-sm shrink-0">
+        <button onclick="switchPage('beranda')" data-nav="beranda" class="nav-item px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition">Beranda</button>
+        <button onclick="switchPage('alur-pelayanan')" data-nav="alur-pelayanan" class="nav-item px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Alur Pelayanan</button>
+        <button onclick="switchPage('kontak-lokasi')" data-nav="kontak-lokasi" class="nav-item px-4 py-1.5 rounded-full text-xs font-semibold whitespace-nowrap transition">Lokasi</button>
       </nav>
 
       <!-- Right Controls: Mode Siang/Malam + UGD 24 Jam + Tombol Menu Vertikal (Saat Zoom / HP) -->
@@ -207,13 +204,13 @@
           <span class="hidden md:block text-[10px] font-medium text-white/85 mt-0.5 truncate max-w-full">Gratis Peserta JKN / KTP</span>
         </button>
 
-        <button onclick="switchPage('kontak-lokasi', false, 1)" data-subnav="jam" class="subnav-item group relative flex flex-col items-center justify-center text-center py-2 sm:py-3 px-1 sm:px-3 hover:bg-white/15 transition-all focus:outline-none">
+        <button onclick="switchPage('jam-pelayanan')" data-subnav="jam" class="subnav-item group relative flex flex-col items-center justify-center text-center py-2 sm:py-3 px-1 sm:px-3 hover:bg-white/15 transition-all focus:outline-none">
           <i data-lucide="clock" class="w-4 h-4 sm:w-6 sm:h-6 text-white/95 group-hover:text-white group-hover:scale-110 transition-transform mb-1 sm:mb-1.5 shrink-0"></i>
           <span class="text-[9px] sm:text-xs font-extrabold uppercase tracking-wide text-white leading-tight">Jam Pelayanan</span>
           <span class="hidden md:block text-[10px] font-medium text-white/85 mt-0.5 truncate max-w-full">Klaster ILP & UGD 24 Jam</span>
         </button>
 
-        <button onclick="switchPage('kontak-lokasi', false, 2)" data-subnav="kontak" class="subnav-item group relative flex flex-col items-center justify-center text-center py-2 sm:py-3 px-1 sm:px-3 hover:bg-white/15 transition-all focus:outline-none">
+        <button onclick="switchPage('kontak-pengaduan')" data-subnav="kontak" class="subnav-item group relative flex flex-col items-center justify-center text-center py-2 sm:py-3 px-1 sm:px-3 hover:bg-white/15 transition-all focus:outline-none">
           <i data-lucide="message-square-heart" class="w-4 h-4 sm:w-6 sm:h-6 text-white/95 group-hover:text-white group-hover:scale-110 transition-transform mb-1 sm:mb-1.5 shrink-0"></i>
           <span class="text-[9px] sm:text-xs font-extrabold uppercase tracking-wide text-white leading-tight">Kontak & Pengaduan</span>
           <span class="hidden md:block text-[10px] font-medium text-white/85 mt-0.5 truncate max-w-full">Hotline & Kotak Saran Online</span>
@@ -294,7 +291,7 @@
         </div>
 
         <!-- TOMBOL NAVIGASI KHUSUS HP (Besar & Mudah Ditekan Jari di Bawah Kartu) -->
-        <div class="grid grid-cols-2 sm:hidden items-center gap-2.5 mt-3">
+        <div id="mobileNavControls" class="grid grid-cols-2 sm:hidden items-center gap-2.5 mt-3">
           <button id="prevBtnMobile" onclick="prevSlide()" class="py-2.5 px-3.5 rounded-2xl bg-white/95 dark:bg-slate-900/95 border border-slate-200/90 dark:border-slate-700 shadow-soft flex items-center justify-center gap-1.5 text-xs font-bold text-slate-700 dark:text-slate-200 active:scale-95 transition disabled:opacity-40 disabled:pointer-events-none">
             <i data-lucide="chevron-left" class="w-4 h-4 text-blue-600 dark:text-cyan-400 shrink-0"></i>
             <span id="prevSlideLabelMobile" class="truncate">Sebelumnya</span>
@@ -306,7 +303,7 @@
         </div>
 
         <!-- Bottom Swipe Hint & Prev/Next Labels (Desktop/Tablet - Symmetrical 3-Column Bar) -->
-        <div class="hidden sm:grid sm:grid-cols-3 mt-3.5 items-center text-xs text-slate-600 dark:text-slate-300 px-14 lg:px-16">
+        <div id="bottomNavControls" class="hidden sm:grid sm:grid-cols-3 mt-3.5 items-center text-xs text-slate-600 dark:text-slate-300 px-14 lg:px-16">
           <div class="justify-self-start">
             <button id="prevBtnBottom" onclick="prevSlide()" class="inline-flex items-center gap-2 font-bold bg-white/95 dark:bg-slate-900/95 px-4 py-2 rounded-full border border-slate-200/90 dark:border-slate-700 shadow-sm hover:border-blue-400 hover:text-blue-600 dark:hover:text-cyan-400 transition disabled:opacity-40 disabled:pointer-events-none">
               <i data-lucide="move-left" class="w-3.5 h-3.5 text-blue-600 dark:text-cyan-400"></i>
@@ -346,25 +343,13 @@
         <i data-lucide="home" class="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0"></i>
         <span>Beranda</span>
       </button>
-      <button onclick="handleMenuClick('cek-usia')" data-nav-mobile="cek-usia" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
-        <i data-lucide="users" class="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0"></i>
-        <span>Pilih Kelompok Usia</span>
-      </button>
-      <button onclick="handleMenuClick('klaster-ilp')" data-nav-mobile="klaster-ilp" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
-        <i data-lucide="layers" class="w-4 h-4 text-teal-600 dark:text-teal-400 shrink-0"></i>
-        <span>Klaster ILP</span>
-      </button>
       <button onclick="handleMenuClick('alur-pelayanan')" data-nav-mobile="alur-pelayanan" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
         <i data-lucide="git-branch" class="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0"></i>
         <span>Alur Pelayanan Pasien</span>
       </button>
-      <button onclick="handleMenuClick('jejaring-wori')" data-nav-mobile="jejaring-wori" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
-        <i data-lucide="map" class="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0"></i>
-        <span>Jejaring 13 Desa Wori</span>
-      </button>
       <button onclick="handleMenuClick('kontak-lokasi')" data-nav-mobile="kontak-lokasi" class="mobile-nav-item flex items-center gap-3 w-full text-left px-3.5 py-2.5 rounded-2xl text-xs sm:text-sm font-semibold transition">
-        <i data-lucide="clock" class="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0"></i>
-        <span>Lokasi & Jam Pelayanan</span>
+        <i data-lucide="map-pin" class="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0"></i>
+        <span>Lokasi Puskesmas</span>
       </button>
     </aside>
 
@@ -1064,9 +1049,9 @@
         ]
       },
 
-      // 5. MENU LOKASI, JAM BUKA & KONTAK PENGADUAN (3 Slide)
+      // 5. MENU LOKASI PUSKESMAS (Khusus Lokasi & Alamat, tanpa Jam Pelayanan & Kontak Pengaduan)
       'kontak-lokasi': {
-        categoryTitle: 'Lokasi, Jam Pelayanan & Kontak',
+        categoryTitle: 'Lokasi & Alamat Puskesmas',
         items: [
           {
             shortLabel: 'Lokasi Puskesmas',
@@ -1087,7 +1072,14 @@
               'Klik tombol Google Maps di bawah untuk petunjuk arah navigasi langsung'
             ],
             actionType: 'maps'
-          },
+          }
+        ]
+      },
+
+      // 6. MENU JAM PELAYANAN (Diakses dari Navigasi Bar 2)
+      'jam-pelayanan': {
+        categoryTitle: 'Jam Buka Pelayanan',
+        items: [
           {
             shortLabel: 'Jam Buka Pelayanan',
             badge: 'JADWAL OPERASIONAL',
@@ -1106,7 +1098,14 @@
               'Sabtu (Pendaftaran Klaster ILP): Pukul 07.30 – 13.00 WITA',
               'Unit Gawat Darurat (UGD) & Ruang Persalinan (PONED): Buka 24 Jam termasuk Minggu & Hari Libur'
             ]
-          },
+          }
+        ]
+      },
+
+      // 7. MENU KONTAK & PENGADUAN (Diakses dari Navigasi Bar 2)
+      'kontak-pengaduan': {
+        categoryTitle: 'Kontak & Pengaduan Masyarakat',
+        items: [
           {
             shortLabel: 'Kontak & Pengaduan',
             badge: 'LAYANAN PENGADUAN',
@@ -1183,14 +1182,14 @@
       }
     }
 
-    // Highlight kotak aktif pada Navigasi Bar ke-2 (seperti kotak biru terang MAXI di contoh Yamaha)
+    // Highlight kotak aktif pada Navigasi Bar ke-2
     function updateSecondaryNavHighlight() {
       let activeSubnav = '';
       if (currentSection === 'klaster-ilp') activeSubnav = 'sistem';
       else if (currentSection === 'jejaring-wori') activeSubnav = 'wilayah';
       else if (currentSection === 'cek-usia') activeSubnav = 'skrining';
-      else if (currentSection === 'kontak-lokasi' && currentSlideIndex === 1) activeSubnav = 'jam';
-      else if (currentSection === 'kontak-lokasi' && currentSlideIndex === 2) activeSubnav = 'kontak';
+      else if (currentSection === 'jam-pelayanan') activeSubnav = 'jam';
+      else if (currentSection === 'kontak-pengaduan') activeSubnav = 'kontak';
 
       document.querySelectorAll('.subnav-item').forEach(btn => {
         if (btn.dataset.subnav === activeSubnav) {
@@ -1234,7 +1233,26 @@
 
       // Update Header Info & Counter
       document.getElementById('sliderCategoryBadge').textContent = sectionObj.categoryTitle;
-      document.getElementById('sliderCounter').textContent = `${currentSlideIndex + 1} dari ${total}`;
+      const counterEl = document.getElementById('sliderCounter');
+      counterEl.textContent = `${currentSlideIndex + 1} dari ${total}`;
+      counterEl.classList.toggle('hidden', total <= 1);
+
+      // Sembunyikan kontrol geser jika isi menu hanya 1 halaman (seperti Lokasi, Jam Pelayanan, Kontak & Pengaduan)
+      const isSinglePage = total <= 1;
+      ['prevBtnSide', 'nextBtnSide'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+          el.classList.toggle('sm:flex', !isSinglePage);
+          el.classList.toggle('sm:hidden', isSinglePage);
+        }
+      });
+      const mobCtrl = document.getElementById('mobileNavControls');
+      if (mobCtrl) mobCtrl.classList.toggle('hidden', isSinglePage);
+      const botCtrl = document.getElementById('bottomNavControls');
+      if (botCtrl) {
+        botCtrl.classList.toggle('sm:grid', !isSinglePage);
+        botCtrl.classList.toggle('sm:hidden', isSinglePage);
+      }
 
       // Update Prev / Next Labels & Stak (Non-Looping) Button States
       const prevText = isFirst ? 'Awal Halaman' : items[currentSlideIndex - 1].shortLabel;
@@ -1365,15 +1383,19 @@
           </div>
 
           <!-- 5. Card Footer: Slide Progress Indicator & Optional Action Button -->
-          <div class="mt-4 sm:mt-5 pt-3.5 border-t border-slate-100 dark:border-slate-800/90 flex flex-col sm:flex-row items-center justify-between gap-3">
+          ${(total > 1 || extraActionHtml) ? `
+          <div class="mt-4 sm:mt-5 pt-3.5 border-t border-slate-100 dark:border-slate-800/90 flex flex-col sm:flex-row items-center ${total > 1 ? 'justify-between' : 'justify-end'} gap-3">
+            ${total > 1 ? `
             <div class="w-full sm:max-w-[240px] flex items-center gap-2.5">
               <div class="flex-1 h-1.5 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden">
                 <div class="h-full rounded-full bg-gradient-to-r ${slide.accent} transition-all duration-300" style="width: ${progressPct}%"></div>
               </div>
               <span class="text-[11px] font-bold text-slate-400 dark:text-slate-500 shrink-0">${currentSlideIndex + 1}/${total}</span>
             </div>
+            ` : ''}
             ${extraActionHtml}
           </div>
+          ` : ''}
         </article>
       `;
 
