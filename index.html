@@ -222,7 +222,7 @@
 
         <button onclick="switchPage('jejaring-wori')" data-subnav="wilayah" class="subnav-item h-full group relative flex flex-col items-center justify-center text-center px-1 sm:px-3 hover:bg-white/15 transition-all focus:outline-none">
           <i data-lucide="compass" class="w-4 h-4 sm:w-5 sm:h-5 text-white/95 group-hover:text-white group-hover:scale-110 transition-transform mb-0.5 sm:mb-1 shrink-0"></i>
-          <span class="text-[9px] sm:text-xs font-extrabold uppercase tracking-wide text-white leading-tight">Cakupan Wilayah Kerja</span>
+          <span class="text-[9px] sm:text-xs font-extrabold uppercase tracking-wide text-white leading-tight">Wilayah Kerja</span>
           <span class="hidden md:block text-[10px] font-medium text-white/85 mt-0.5 truncate max-w-full">13 Desa Kecamatan Wori</span>
         </button>
 
@@ -739,7 +739,7 @@
               'UGD 24 Jam & Persalinan: Penanganan gawat darurat medis, kecelakaan, observasi & Ambulans Siaga',
               'Laboratorium & Poli Gigi: Pemeriksaan darah rutin, kimia darah, urin, TCM TBC, serta perawatan Gigi & Mulut',
               'Pelayanan Kefarmasian (Apotek): Penyerahan obat resep elektronik klaster & Konseling Informasi Obat',
-              'Jejaring Wilayah: Puskesmas Pembantu (Pustu), Poskesdes & Posyandu Siklus Hidup di 13 Desa Wori'
+              'Jejaring Wilayah: 3 Pustu, 6 Poskesdes & 16 Posyandu ILP di 13 Desa Kecamatan Wori'
             ]
           }
         ]
@@ -856,255 +856,27 @@
         ]
       },
 
-      // 4. MENU JEJARING 13 DESA WORI (13 Slide Desa)
+      // 4. MENU WILAYAH KERJA (1 Layar Utuh: 13 Desa, 3 Pustu, 6 Poskesdes & 16 Posyandu ILP)
       'jejaring-wori': {
-        categoryTitle: 'Jejaring 13 Desa Wilayah Kerja',
+        categoryTitle: 'Wilayah Kerja Puskesmas Wori',
         items: [
           {
-            shortLabel: 'Desa Wori',
-            badge: 'PUSAT KECAMATAN WORI',
-            icon: 'map-pin',
-            accent: 'from-blue-600 via-cyan-500 to-teal-500',
-            title: 'Desa Wori',
-            subtitle: 'Lokasi Puskesmas Induk Wori serta pusat koordinasi Integrasi Layanan Primer (ILP) dan Posyandu Siklus Hidup di Desa Wori.',
-            metaLeftLabel: 'Fasilitas Kesehatan',
-            metaLeftValue: 'Puskesmas Induk Wori & Posyandu ILP',
-            metaRightLabel: 'Kecamatan / Kab.',
-            metaRightValue: 'Kec. Wori, Kab. Minahasa Utara',
-            pointsTitle: 'Layanan Jejaring di Desa Wori:',
-            points: [
-              'Pelayanan langsung Klaster 1–4, UGD 24 Jam, Persalinan, Lab & Apotek di Puskesmas Induk',
-              'Posyandu Siklus Hidup melayani Ibu Hamil, Bayi, Balita, Remaja, Dewasa & Lansia',
-              'Kunjungan Rumah (Home Care) oleh tim kesehatan Puskesmas dan Kader Posyandu',
-              'Pemantauan jentik berkala, sanitasi lingkungan (STBM) & kelas ibu hamil desa'
-            ]
-          },
-          {
-            shortLabel: 'Desa Tiwoho',
-            badge: 'JEJARING PUSTU & POSYANDU',
-            icon: 'map-pin',
-            accent: 'from-teal-600 via-cyan-500 to-blue-500',
-            title: 'Desa Tiwoho',
-            subtitle: 'Dilayani oleh jaringan Puskesmas Pembantu (Pustu) dan Posyandu Siklus Hidup yang terintegrasi dengan Puskesmas Wori.',
-            metaLeftLabel: 'Fasilitas Kesehatan',
-            metaLeftValue: 'Pustu Tiwoho & Posyandu Siklus Hidup',
-            metaRightLabel: 'Tenaga Kesehatan',
-            metaRightValue: 'Bidan Desa, Perawat Pustu & Kader ILP',
-            pointsTitle: 'Layanan Kesehatan di Desa Tiwoho:',
-            points: [
-              'Pelayanan kesehatan dasar, pemeriksaan kehamilan (ANC) & pemantauan nifas di Pustu',
-              'Posyandu Siklus Hidup bulanan untuk penimbangan balita, imunisasi & skrining PTM dewasa/lansia',
-              'Kunjungan rumah keluarga binaan oleh Kader Posyandu dan tenaga kesehatan Pustu',
-              'Rujukan cepat terkoordinasi ke Puskesmas Induk Wori bila memerlukan pemeriksaan dokter/lab'
-            ]
-          },
-          {
-            shortLabel: 'Desa Budo',
-            badge: 'JEJARING PUSTU & POSYANDU',
-            icon: 'map-pin',
-            accent: 'from-cyan-600 via-teal-500 to-emerald-500',
-            title: 'Desa Budo',
-            subtitle: 'Dilayani oleh jaringan Puskesmas Pembantu (Pustu) dan Posyandu Siklus Hidup bagi seluruh warga Desa Budo.',
-            metaLeftLabel: 'Fasilitas Kesehatan',
-            metaLeftValue: 'Pustu Budo & Posyandu Siklus Hidup',
-            metaRightLabel: 'Tenaga Kesehatan',
-            metaRightValue: 'Bidan Desa, Perawat Pustu & Kader ILP',
-            pointsTitle: 'Layanan Kesehatan di Desa Budo:',
-            points: [
-              'Pemeriksaan kesehatan dasar, KIA, dan konsultasi gizi masyarakat di Pustu Budo',
-              'Posyandu Siklus Hidup: layanan terpadu Ibu Hamil, Balita, Remaja, Usia Produktif & Lansia',
-              'Deteksi dini hipertensi, cek gula darah berkala, dan senam sehat warga',
-              'Pemantauan kesehatan lingkungan dan edukasi Perilaku Hidup Bersih dan Sehat (PHBS)'
-            ]
-          },
-          {
-            shortLabel: 'Desa Darunu',
-            badge: 'JEJARING PUSTU & POSYANDU',
-            icon: 'map-pin',
-            accent: 'from-blue-600 via-indigo-500 to-cyan-500',
-            title: 'Desa Darunu',
-            subtitle: 'Jejaring layanan primer Puskesmas Wori melalui Pustu dan Posyandu Siklus Hidup di Desa Darunu.',
-            metaLeftLabel: 'Fasilitas Kesehatan',
-            metaLeftValue: 'Pustu Darunu & Posyandu Siklus Hidup',
-            metaRightLabel: 'Tenaga Kesehatan',
-            metaRightValue: 'Bidan Desa, Perawat & Kader Posyandu',
-            pointsTitle: 'Layanan Kesehatan di Desa Darunu:',
-            points: [
-              'Layanan pemeriksaan ibu hamil, imunisasi bayi/balita, dan pemantauan tumbuh kembang',
-              'Skrining faktor risiko Penyakit Tidak Menular (tensi, berat badan, lingkar perut, gula darah)',
-              'Pendampingan minum obat teratur bagi pasien hipertensi, diabetes, dan TBC',
-              'Kunjungan rumah berkala untuk keluarga dengan risiko kesehatan'
-            ]
-          },
-          {
-            shortLabel: 'Desa Bulo',
-            badge: 'JEJARING POSKESDES & POSYANDU',
-            icon: 'map-pin',
-            accent: 'from-teal-600 via-emerald-500 to-cyan-500',
-            title: 'Desa Bulo',
-            subtitle: 'Jejaring layanan kesehatan dasar melalui Poskesdes dan Posyandu Siklus Hidup bagi masyarakat Desa Bulo.',
-            metaLeftLabel: 'Fasilitas Kesehatan',
-            metaLeftValue: 'Poskesdes Bulo & Posyandu Siklus Hidup',
-            metaRightLabel: 'Tenaga Kesehatan',
-            metaRightValue: 'Bidan Desa, Perawat & Kader Posyandu',
-            pointsTitle: 'Layanan Kesehatan di Desa Bulo:',
-            points: [
-              'Pelayanan KIA, KB, imunisasi rutin, dan pencegahan stunting balita',
-              'Posyandu Siklus Hidup untuk pemeriksaan kesehatan remaja, dewasa, hingga lansia',
-              'Penyuluhan kesehatan masyarakat dan surveilans faktor risiko penyakit menular',
-              'Koordinasi rujukan langsung ke Puskesmas Wori untuk penanganan medis lanjutan'
-            ]
-          },
-          {
-            shortLabel: 'Desa Kima Bajo',
-            badge: 'JEJARING PUSTU & POSYANDU',
-            icon: 'map-pin',
-            accent: 'from-blue-600 via-cyan-500 to-teal-500',
-            title: 'Desa Kima Bajo',
-            subtitle: 'Pelayanan kesehatan primer melalui Pustu Kima Bajo dan Posyandu Siklus Hidup bagi warga pesisir Desa Kima Bajo.',
-            metaLeftLabel: 'Fasilitas Kesehatan',
-            metaLeftValue: 'Pustu Kima Bajo & Posyandu Siklus Hidup',
-            metaRightLabel: 'Tenaga Kesehatan',
-            metaRightValue: 'Bidan Desa, Perawat Pustu & Kader ILP',
-            pointsTitle: 'Layanan Kesehatan di Desa Kima Bajo:',
-            points: [
-              'Pemeriksaan kehamilan, pemantauan gizi balita, dan layanan imunisasi lengkap',
-              'Skrining PTM usia produktif dan pengkajian kesehatan lanjut usia di Posyandu',
-              'Pemantauan sanitasi air bersih dan pencegahan penyakit menular berbasis lingkungan',
-              'Kunjungan rumah terpadu oleh Bidan Desa dan Kader Kesehatan'
-            ]
-          },
-          {
-            shortLabel: 'Desa Talawaan Bantik',
-            badge: 'JEJARING PUSTU & POSYANDU',
-            icon: 'map-pin',
-            accent: 'from-cyan-600 via-blue-500 to-indigo-500',
-            title: 'Desa Talawaan Bantik',
-            subtitle: 'Jejaring Puskesmas Pembantu (Pustu) dan Posyandu Siklus Hidup yang melayani masyarakat Desa Talawaan Bantik.',
-            metaLeftLabel: 'Fasilitas Kesehatan',
-            metaLeftValue: 'Pustu Talawaan Bantik & Posyandu ILP',
-            metaRightLabel: 'Tenaga Kesehatan',
-            metaRightValue: 'Bidan Desa, Perawat Pustu & Kader ILP',
-            pointsTitle: 'Layanan Kesehatan di Desa Talawaan Bantik:',
-            points: [
-              'Pelayanan kesehatan ibu dan anak, konseling gizi, serta pemberian vitamin & imunisasi',
-              'Pemeriksaan tekanan darah, gula darah, dan edukasi pencegahan penyakit kronis',
-              'Skrining anemia remaja putri dan kegiatan usaha kesehatan sekolah/remaja',
-              'Tindak lanjut perawatan rumah (Home Care) bagi lansia dan pasien kronis'
-            ]
-          },
-          {
-            shortLabel: 'Desa Talawaan Atas',
-            badge: 'JEJARING PUSTU & POSYANDU',
-            icon: 'map-pin',
-            accent: 'from-teal-600 via-cyan-500 to-blue-500',
-            title: 'Desa Talawaan Atas',
-            subtitle: 'Pelayanan kesehatan dekat warga melalui Pustu Talawaan Atas dan Posyandu Siklus Hidup.',
-            metaLeftLabel: 'Fasilitas Kesehatan',
-            metaLeftValue: 'Pustu Talawaan Atas & Posyandu ILP',
-            metaRightLabel: 'Tenaga Kesehatan',
-            metaRightValue: 'Bidan Desa, Perawat Pustu & Kader ILP',
-            pointsTitle: 'Layanan Kesehatan di Desa Talawaan Atas:',
-            points: [
-              'Pemeriksaan kesehatan dasar, ANC ibu hamil, dan pemantauan tumbuh kembang balita',
-              'Posyandu Siklus Hidup untuk skrining kesehatan usia dewasa dan lanjut usia',
-              'Pemberdayaan masyarakat desa dalam pencegahan DBD dan kebersihan lingkungan',
-              'Layanan Puskesmas Keliling (Pusling) terjadwal dari Puskesmas Wori'
-            ]
-          },
-          {
-            shortLabel: 'Desa Lansa',
-            badge: 'JEJARING POSKESDES & POSYANDU',
-            icon: 'map-pin',
-            accent: 'from-emerald-600 via-teal-500 to-cyan-500',
-            title: 'Desa Lansa',
-            subtitle: 'Jejaring pelayanan kesehatan masyarakat melalui Poskesdes dan Posyandu Siklus Hidup di Desa Lansa.',
-            metaLeftLabel: 'Fasilitas Kesehatan',
-            metaLeftValue: 'Poskesdes Lansa & Posyandu Siklus Hidup',
-            metaRightLabel: 'Tenaga Kesehatan',
-            metaRightValue: 'Bidan Desa, Perawat & Kader Posyandu',
-            pointsTitle: 'Layanan Kesehatan di Desa Lansa:',
-            points: [
-              'Pemantauan kesehatan ibu hamil, nifas, bayi, dan balita secara berkala',
-              'Skrining kesehatan usia produktif dan lansia (cek tensi, gula darah & konseling sehat)',
-              'Kunjungan rumah oleh kader untuk pemantauan kepatuhan pengobatan warga',
-              'Edukasi gizi keluarga dan pencegahan stunting terpadu'
-            ]
-          },
-          {
-            shortLabel: 'Desa Lantung',
-            badge: 'JEJARING POSKESDES & POSYANDU',
-            icon: 'map-pin',
-            accent: 'from-blue-600 via-cyan-500 to-teal-500',
-            title: 'Desa Lantung',
-            subtitle: 'Jejaring pelayanan kesehatan dasar melalui Poskesdes dan Posyandu Siklus Hidup di Desa Lantung.',
-            metaLeftLabel: 'Fasilitas Kesehatan',
-            metaLeftValue: 'Poskesdes Lantung & Posyandu Siklus Hidup',
-            metaRightLabel: 'Tenaga Kesehatan',
-            metaRightValue: 'Bidan Desa, Perawat & Kader Posyandu',
-            pointsTitle: 'Layanan Kesehatan di Desa Lantung:',
-            points: [
-              'Pelayanan KIA, imunisasi rutin lengkap, dan pemantauan status gizi anak',
-              'Deteksi dini penyakit tidak menular (Hipertensi, Diabetes, Obesitas) bagi warga dewasa',
-              'Pelayanan kesehatan ramah lansia dan senam kebugaran bersama',
-              'Surveilans kesehatan lingkungan dan pencegahan penyakit menular'
-            ]
-          },
-          {
-            shortLabel: 'Desa Minaesa',
-            badge: 'JEJARING POSKESDES & POSYANDU',
-            icon: 'map-pin',
-            accent: 'from-cyan-600 via-teal-500 to-emerald-500',
-            title: 'Desa Minaesa',
-            subtitle: 'Pelayanan kesehatan primer terintegrasi melalui Poskesdes dan Posyandu Siklus Hidup di Desa Minaesa.',
-            metaLeftLabel: 'Fasilitas Kesehatan',
-            metaLeftValue: 'Poskesdes Minaesa & Posyandu Siklus Hidup',
-            metaRightLabel: 'Tenaga Kesehatan',
-            metaRightValue: 'Bidan Desa, Perawat & Kader Posyandu',
-            pointsTitle: 'Layanan Kesehatan di Desa Minaesa:',
-            points: [
-              'Layanan pemeriksaan kehamilan, konseling menyusui, dan imunisasi bayi/balita',
-              'Skrining kesehatan berkala bagi remaja, usia dewasa, dan lanjut usia di Posyandu',
-              'Pendampingan keluarga binaan melalui kunjungan rumah kader kesehatan',
-              'Rujukan terintegrasi ke Puskesmas Wori untuk layanan dokter & laboratorium'
-            ]
-          },
-          {
-            shortLabel: 'Desa Ponto',
-            badge: 'JEJARING POSKESDES & POSYANDU',
-            icon: 'map-pin',
-            accent: 'from-indigo-600 via-blue-500 to-cyan-500',
-            title: 'Desa Ponto',
-            subtitle: 'Jejaring pelayanan kesehatan masyarakat melalui Poskesdes dan Posyandu Siklus Hidup di Desa Ponto.',
-            metaLeftLabel: 'Fasilitas Kesehatan',
-            metaLeftValue: 'Poskesdes Ponto & Posyandu Siklus Hidup',
-            metaRightLabel: 'Tenaga Kesehatan',
-            metaRightValue: 'Bidan Desa, Perawat & Kader Posyandu',
-            pointsTitle: 'Layanan Kesehatan di Desa Ponto:',
-            points: [
-              'Pelayanan kesehatan ibu dan anak, penimbangan balita, serta edukasi MP-ASI',
-              'Pemeriksaan tekanan darah, skrining gula darah, dan konseling berhenti merokok',
-              'Pemantauan kesehatan lanjut usia dan pencegahan risiko jatuh/demensia',
-              'Pengawasan sanitasi lingkungan desa dan pemberantasan sarang nyamuk'
-            ]
-          },
-          {
-            shortLabel: 'Desa Kulu',
-            badge: 'JEJARING PUSTU & POSYANDU',
-            icon: 'map-pin',
+            shortLabel: 'Wilayah Kerja',
+            badge: 'WILAYAH KERJA',
+            icon: 'compass',
             accent: 'from-teal-600 via-cyan-500 to-blue-600',
-            title: 'Desa Kulu',
-            subtitle: 'Dilayani oleh jaringan Puskesmas Pembantu (Pustu) Kulu dan Posyandu Siklus Hidup bagi seluruh warga Desa Kulu.',
-            metaLeftLabel: 'Fasilitas Kesehatan',
-            metaLeftValue: 'Pustu Kulu & Posyandu Siklus Hidup',
-            metaRightLabel: 'Tenaga Kesehatan',
-            metaRightValue: 'Bidan Desa, Perawat Pustu & Kader ILP',
-            pointsTitle: 'Layanan Kesehatan di Desa Kulu:',
+            title: 'Wilayah Kerja Puskesmas Wori',
+            subtitle: 'Melayani masyarakat di seluruh 13 Desa Kecamatan Wori, Kabupaten Minahasa Utara melalui Puskesmas Induk, jaringan Pustu, Poskesdes, dan Posyandu ILP.',
+            metaLeftLabel: 'Wilayah Administratif',
+            metaLeftValue: '13 Desa di Kecamatan Wori',
+            metaRightLabel: 'Jejaring Fasilitas Desa',
+            metaRightValue: '3 Pustu, 6 Poskesdes & 16 Posyandu ILP',
+            pointsTitle: 'Sebaran Fasilitas & Jejaring Pelayanan Kesehatan Desa:',
             points: [
-              'Pelayanan kesehatan dasar, pemeriksaan ibu hamil (ANC) & layanan KB di Pustu Kulu',
-              'Posyandu Siklus Hidup untuk bayi, balita, remaja, usia produktif, dan lansia',
-              'Skrining penyakit tidak menular & pemantauan terapi obat pasien kronis',
-              'Kunjungan rumah terpadu dan koordinasi rujukan ke Puskesmas Induk Wori'
+              '<strong>Puskesmas Pembantu (Pustu) — 3 Desa:</strong> Tersedia di <strong>Desa Talawaan Atas</strong>, <strong>Desa Darunu</strong>, dan <strong>Desa Kulu</strong>.',
+              '<strong>Pos Kesehatan Desa (Poskesdes) — 6 Desa:</strong> Tersedia di <strong>Desa Tiwoho</strong>, <strong>Desa Minaesa</strong>, <strong>Desa Talawaan Bantik</strong>, <strong>Desa Ponto</strong>, <strong>Desa Lansa</strong>, dan <strong>Desa Lantung</strong>.',
+              '<strong>Pelayanan Posyandu ILP — 16 Tempat:</strong> Tersebar di <strong>13 Desa + 3 Posyandu di Desa Wori</strong> yang melayani seluruh siklus hidup (Ibu Hamil, Balita, Remaja, Dewasa & Lansia).',
+              '<strong>Daftar 13 Desa Wilayah Kerja:</strong> Wori (Puskesmas Induk), Talawaan Atas, Darunu, Kulu, Tiwoho, Minaesa, Talawaan Bantik, Ponto, Lansa, Lantung, Budo, Bulo, dan Kima Bajo.'
             ]
           }
         ]
