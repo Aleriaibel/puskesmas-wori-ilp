@@ -255,19 +255,36 @@
     <main id="mainTouchArea" class="flex-1 min-w-0 flex flex-col relative px-3 sm:px-6 lg:px-8 py-4 sm:py-8">
 
       <!-- ==========================================
-           VIEW 1: BERANDA
+           VIEW 1: BERANDA (HERO TITLE + BANNER CAROUSEL INFORMASI TERKINI PELAYANAN)
            ========================================== -->
-      <section id="view-beranda" class="w-full max-w-5xl mx-auto my-auto text-center py-2">
+      <section id="view-beranda" class="w-full max-w-6xl mx-auto my-auto flex flex-col items-center text-center py-1 sm:py-2">
         <!-- Main Title -->
-        <h1 class="text-2xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
-          <span class="hero-text-halo">PUSKESMAS WORI</span> <br class="hidden sm:inline" />
-          <span class="gemini-gradient-text inline-block mt-1 pb-2.5 sm:pb-3.5 leading-[1.35] drop-shadow-[0_2px_10px_rgba(255,255,255,0.85)] dark:drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">"Melayani dengan CINTA"</span>
+        <h1 class="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+          <span class="hero-text-halo">PUSKESMAS WORI</span>
+          <span class="gemini-gradient-text inline-block sm:ml-2 mt-0.5 pb-2 sm:pb-2.5 leading-[1.35] drop-shadow-[0_2px_10px_rgba(255,255,255,0.85)] dark:drop-shadow-[0_2px_10px_rgba(0,0,0,0.85)]">"Melayani dengan CINTA"</span>
         </h1>
 
-        <!-- Subtitle Paragraph -->
-        <p class="hero-text-halo mt-3 sm:mt-5 text-xs sm:text-lg text-slate-800 dark:text-slate-100 max-w-2xl mx-auto leading-relaxed font-body font-medium px-1">
-          Selamat datang di portal informasi <strong>Puskesmas Wori</strong>. Melalui program <strong>Integrasi Layanan Primer (ILP)</strong>, pelayanan kini ditata berdasarkan klaster siklus hidup—mulai dari ibu hamil, bayi, remaja, usia dewasa, hingga lansia di seluruh wilayah kerja Kecamatan Wori.
-        </p>
+        <!-- BANNER SLIDER INFORMASI TERKINI PELAYANAN PUSKESMAS WORI (Gaya Banner Showcase + Indikator Titik Bulat di Bawah) -->
+        <div id="heroNewsBanner" onmouseenter="pauseHeroBanner()" onmouseleave="resumeHeroBanner()" class="mt-2 sm:mt-3.5 w-full rounded-[28px] overflow-hidden shadow-2xl border-2 border-white/80 dark:border-slate-700/90 relative select-none">
+          
+          <!-- Banner Slide Content Container -->
+          <div id="heroBannerViewport" class="relative w-full min-h-[290px] sm:min-h-[340px] lg:min-h-[370px] flex items- stretch">
+            <!-- Diisi otomatis oleh renderHeroBanner() -->
+          </div>
+
+          <!-- Tombol Panah Kiri / Kanan Halus di Samping Banner -->
+          <button onclick="prevHeroBanner()" aria-label=" Informasi Sebelumnya" class="hidden sm:flex absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-slate-900/45 hover:bg-slate-900/75 text-white border border-white/30 backdrop-blur-md items-center justify-center transition active:scale-95">
+            <i data-lucide="chevron-left" class="w-5 h-5"></i>
+          </button>
+          <button onclick="nextHeroBanner()" aria-label="Informasi Selanjutnya" class="hidden sm:flex absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 rounded-full bg-slate-900/45 hover:bg-slate-900/75 text-white border border-white/30 backdrop-blur-md items-center justify-center transition active:scale-95">
+            <i data-lucide="chevron-right" class="w-5 h-5"></i>
+          </button>
+
+          <!-- Indikator Titik Bulat (Dots) di Bagian Bawah Tengah Persis Seperti Gambar Referensi -->
+          <div id="heroBannerDots" class="absolute bottom-3.5 sm:bottom-4 inset-x-0 z-20 flex items-center justify-center gap-2.5 sm:gap-3 px-4">
+            <!-- Dots dirender oleh renderHeroBanner() -->
+          </div>
+        </div>
       </section>
 
       <!-- ==========================================
@@ -1456,10 +1473,14 @@
     }, { passive: true });
 
     mainArea.addEventListener('touchend', (e) => {
-      if (currentSection === 'beranda') return;
       touchEndX = e.changedTouches[0].screenX;
       const diff = touchStartX - touchEndX;
       if (Math.abs(diff) > 40) {
+        if (currentSection === 'beranda') {
+          if (diff > 0) nextHeroBanner();
+          else prevHeroBanner();
+          return;
+        }
         if (diff > 0) {
           nextSlide();
         } else {
@@ -1470,7 +1491,11 @@
 
     // Dukungan Tombol Panah Kiri / Kanan di Keyboard
     window.addEventListener('keydown', (e) => {
-      if (currentSection === 'beranda') return;
+      if (currentSection === 'beranda') {
+        if (e.key === 'ArrowRight') nextHeroBanner();
+        if (e.key === 'ArrowLeft') prevHeroBanner();
+        return;
+      }
       if (e.key === 'ArrowRight') nextSlide();
       if (e.key === 'ArrowLeft') prevSlide();
     });
@@ -1573,10 +1598,279 @@
       });
     });
 
+    // ==========================================
+    // DATA & LOGIKA BANNER INFORMASI TERKINI PELAYANAN (LAYAR UTAMA / BERANDA)
+    // ==========================================
+    let currentHeroBannerIndex = 0;
+    let heroBannerTimer = null;
+
+    const heroBannersData = [
+      {
+        bgGradient: 'from-blue-900/90 via-cyan-800/85 to-teal-800/90',
+        ringColor: 'ring-amber-300',
+        circleTopImg: 'logo-puskesmas-wori.png?v=2',
+        circleTopCaption: 'ILP Terpadu',
+        circleBottomImg: 'logo-usia-4-dewasa.png',
+        circleBottomCaption: '4 Klaster',
+        mainImage: 'logo-puskesmas-wori.png?v=2',
+        pillTag: 'TRANSFORMASI LAYANAN PRIMER',
+        headlineTop: 'PELAYANAN KLASTER ILP',
+        headlineMain: 'PUSKESMAS WORI',
+        headlineAccent: 'SIKLUS HIDUP TERPADU',
+        description: 'Pelayanan kesehatan kini ditata berdasarkan Klaster Siklus Hidup (Ibu & Anak, Usia Dewasa & Lansia, Penanggulangan Penyakit Menular, serta Lintas Klaster).',
+        scheduleBadge: 'Senin–Kamis: 08.00–12.00 WITA • Jumat & Sabtu: 08.00–10.00 WITA',
+        ctaText: 'Lihat Sistem Pelayanan',
+        ctaAction: "switchPage('klaster-ilp')"
+      },
+      {
+        bgGradient: 'from-teal-900/90 via-emerald-800/85 to-cyan-900/90',
+        ringColor: 'ring-yellow-300',
+        circleTopImg: 'logo-usia-1-ibuhamil.png',
+        circleTopCaption: 'Ibu & Anak',
+        circleBottomImg: 'logo-usia-5-lansia.png',
+        circleBottomCaption: 'Lansia Sehat',
+        mainImage: 'logo-usia-2-balita.png',
+        pillTag: 'GEBYAR POSYANDU SIKLUS HIDUP',
+        headlineTop: '16 TEMPAT PELAYANAN',
+        headlineMain: 'POSYANDU ILP',
+        headlineAccent: '13 DESA + 3 POSYANDU WORI',
+        description: 'Pelayanan dekat warga melalui 16 Tempat Posyandu ILP (13 Desa + 3 Posyandu di Desa Wori), didukung 3 Pustu (Talawaan Atas, Darunu, Kulu) & 6 Poskesdes.',
+        scheduleBadge: 'Melayani Ibu Hamil, Bayi, Balita, Remaja, Dewasa & Lansia',
+        ctaText: 'Lihat Wilayah Kerja',
+        ctaAction: "switchPage('jejaring-wori')"
+      },
+      {
+        bgGradient: 'from-indigo-900/90 via-blue-800/85 to-cyan-800/90',
+        ringColor: 'ring-cyan-300',
+        circleTopImg: 'logo-usia-3-remaja.png',
+        circleTopCaption: 'Cek Anemia',
+        circleBottomImg: 'logo-usia-4-dewasa.png',
+        circleBottomCaption: 'Cek PTM',
+        mainImage: 'logo-usia-4-dewasa.png',
+        pillTag: 'PROGRAM DETEKSI DINI KESEHATAN',
+        headlineTop: 'SKRINING KESEHATAN',
+        headlineMain: '100% GRATIS',
+        headlineAccent: 'PESERTA JKN & WARGA BER-KTP',
+        description: 'Pemeriksaan berkala Tekanan Darah (Hipertensi), Gula Darah (Diabetes), Kolesterol, Kanker Leher Rahim (IVA/Sadanis), TBC, dan Skrining Kesehatan Jiwa.',
+        scheduleBadge: 'Cukup Bawa KTP / Kartu Keluarga / Kartu BPJS Kesehatan',
+        ctaText: 'Cek Paket Skrining Usia',
+        ctaAction: "switchPage('cek-usia')"
+      },
+      {
+        bgGradient: 'from-rose-900/90 via-pink-800/85 to-amber-800/90',
+        ringColor: 'ring-amber-300',
+        circleTopImg: 'logo-usia-1-ibuhamil.png',
+        circleTopCaption: 'ANC & USG',
+        circleBottomImg: 'logo-usia-2-balita.png',
+        circleBottomCaption: 'Imunisasi',
+        mainImage: 'logo-usia-1-ibuhamil.png',
+        pillTag: 'KLASTER 2 • IBU, ANAK & REMAJA',
+        headlineTop: 'ANC TERPADU, USG DASAR',
+        headlineMain: '& CEGAH STUNTING',
+        headlineAccent: 'GENERASI WORI SEHAT',
+        description: 'Pemeriksaan kehamilan terpadu (6x ANC + USG Dasar), Persalinan 24 Jam (PONED), Imunisasi Rutin Lengkap Balita, SDIDTK, dan Skrining Anemia Remaja Putri.',
+        scheduleBadge: 'Wajib Membawa Buku KIA bagi Ibu Hamil & Balita',
+        ctaText: 'Detail Layanan Ibu & Anak',
+        ctaAction: "switchPage('cek-usia', false, 0)"
+      },
+      {
+        bgGradient: 'from-cyan-900/90 via-blue-900/85 to-indigo-900/90',
+        ringColor: 'ring-emerald-300',
+        circleTopImg: 'logo-usia-4-dewasa.png',
+        circleTopCaption: 'Posbindu',
+        circleBottomImg: 'logo-usia-5-lansia.png',
+        circleBottomCaption: 'Prolanis',
+        mainImage: 'logo-usia-5-lansia.png',
+        pillTag: 'KLASTER 3 • DEWASA & LANJUT USIA',
+        headlineTop: 'PELAYANAN RAMAH LANSIA',
+        headlineMain: '& KLUB PROLANIS',
+        headlineAccent: 'MANDIRI, AKTIF & PRODUKTIF',
+        description: 'Pengkajian Paripurna Pasien Geriatri (P3G), pemantauan terapi rutin Hipertensi & Diabetes Melitus, pemeriksaan laboratorium, serta senam sehat Prolanis.',
+        scheduleBadge: 'Jalur Prioritas Ramah Lansia & Penyandang Disabilitas',
+        ctaText: 'Detail Layanan Lansia',
+        ctaAction: "switchPage('cek-usia', false, 4)"
+      },
+      {
+        bgGradient: 'from-red-900/90 via-rose-800/85 to-orange-800/90',
+        ringColor: 'ring-yellow-300',
+        circleTopImg: 'logo-usia-6-ugd.png',
+        circleTopCaption: 'UGD 24 Jam',
+        circleBottomImg: 'logo-usia-1-ibuhamil.png',
+        circleBottomCaption: 'PONED 24 Jam',
+        mainImage: 'logo-usia-6-ugd.png',
+        pillTag: 'LAYANAN DARURAT MEDIS NONSTOP',
+        headlineTop: 'SIAGA 24 JAM PENUH',
+        headlineMain: 'UGD & PERSALINAN',
+        headlineAccent: 'TANPA ANTRE LOKET',
+        description: 'Penanganan kasus gawat darurat medis, kecelakaan, observasi, persalinan 24 jam (PONED), serta kesiapsiagaan Ambulans Rujukan Puskesmas Wori setiap hari.',
+        scheduleBadge: 'Hotline UGD / PSC: 119 / 0811-4300-911 (Buka Minggu & Hari Libur)',
+        ctaText: 'Info Kontak Darurat UGD',
+        ctaAction: 'openEmergencyModal()'
+      }
+    ];
+
+    function renderHeroBanner(direction = 'right') {
+      const viewport = document.getElementById('heroBannerViewport');
+      const dotsContainer = document.getElementById('heroBannerDots');
+      if (!viewport || !dotsContainer) return;
+
+      const total = heroBannersData.length;
+      if (currentHeroBannerIndex < 0) currentHeroBannerIndex = 0;
+      if (currentHeroBannerIndex >= total) currentHeroBannerIndex = total - 1;
+
+      const b = heroBannersData[currentHeroBannerIndex];
+      const animClass = direction === 'left' ? 'slide-enter-left' : 'slide-enter-right';
+
+      viewport.innerHTML = `
+        <div class="${animClass} relative w-full min-h-[290px] sm:min-h-[340px] lg:min-h-[370px] flex items-center bg-cover bg-center px-5 sm:px-12 lg:px-14 pt-5 pb-12 sm:py-8" style="background-image: url('bg-puskesmas-wori.jpg');">
+          <!-- Layer Gradasi Warna Kontras agar Teks & Visual Menonjol Tajam -->
+          <div class="absolute inset-0 bg-gradient-to-r ${b.bgGradient} backdrop-blur-[2px]"></div>
+
+          <!-- Dekorasi Cahaya Halus -->
+          <div class="absolute -top-16 -left-16 w-60 h-60 rounded-full bg-white/10 blur-2xl pointer-events-none"></div>
+          <div class="absolute -bottom-16 -right-16 w-64 h-64 rounded-full bg-cyan-400/15 blur-2xl pointer-events-none"></div>
+
+          <!-- Grid 3 Bagian seperti Banner Showcase (Lingkaran Kiri | Poster Informasi Tengah | Visual Utama Kanan) -->
+          <div class="relative z-10 w-full grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 items-center">
+            
+            <!-- 1. KOLOM KIRI: 2 Lingkaran Highlight Bertumpuk (Gaya Showcase seperti Referensi) -->
+            <div class="hidden lg:flex lg:col-span-3 flex-col items-center justify-center -space-y-3">
+              <div class="relative w-28 h-28 rounded-full bg-white/95 p-1.5 shadow-xl ring-4 ${b.ringColor} flex items-center justify-center transform -rotate-3 hover:scale-105 transition">
+                <img src="${b.circleTopImg}" alt="${b.circleTopCaption}" class="w-full h-full rounded-full object-contain logo-crisp" />
+                <span class="absolute -bottom-1.5 px-2.5 py-0.5 rounded-full bg-slate-900 text-amber-300 text-[10px] font-extrabold uppercase tracking-wider shadow">
+                  ${b.circleTopCaption}
+                </span>
+              </div>
+              <div class="relative z-10 w-28 h-28 rounded-full bg-white/95 p-1.5 shadow-xl ring-4 ${b.ringColor} flex items-center justify-center transform rotate-3 hover:scale-105 transition">
+                <img src="${b.circleBottomImg}" alt="${b.circleBottomCaption}" class="w-full h-full rounded-full object-contain logo-crisp" />
+                <span class="absolute -bottom-1.5 px-2.5 py-0.5 rounded-full bg-slate-900 text-cyan-300 text-[10px] font-extrabold uppercase tracking-wider shadow">
+                  ${b.circleBottomCaption}
+                </span>
+              </div>
+            </div>
+
+            <!-- 2. KOLOM TENGAH: Informasi Terkini Pelayanan Puskesmas Wori -->
+            <div class="lg:col-span-6 text-center lg:text-left flex flex-col items-center lg:items-start">
+              <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/15 border border-white/30 text-amber-300 text-[10px] sm:text-xs font-extrabold uppercase tracking-widest backdrop-blur-sm">
+                <span class="w-2 h-2 rounded-full bg-amber-300 animate-pulse"></span>
+                <span>${b.pillTag}</span>
+              </span>
+
+              <div class="mt-2.5">
+                <p class="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-cyan-200 drop-shadow">
+                  ${b.headlineTop}
+                </p>
+                <h2 class="text-2xl sm:text-4xl lg:text-[40px] font-extrabold tracking-tight text-white leading-none mt-1 drop-shadow-md">
+                  ${b.headlineMain}
+                </h2>
+                <span class="inline-block mt-2 px-3.5 py-1 rounded-xl bg-amber-300 text-slate-950 text-xs sm:text-sm font-extrabold uppercase tracking-wider shadow-md">
+                  ${b.headlineAccent}
+                </span>
+              </div>
+
+              <p class="mt-3 text-xs sm:text-sm text-white/95 leading-relaxed max-w-xl font-body">
+                ${b.description}
+              </p>
+
+              <!-- Info Jadwal / Catatan Penting + Tombol Aksi -->
+              <div class="mt-3.5 flex flex-wrap items-center justify-center lg:justify-start gap-2.5">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-950/45 border border-white/20 text-[11px] sm:text-xs font-bold text-cyan-100">
+                  <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-300 shrink-0"></i>
+                  <span>${b.scheduleBadge}</span>
+                </span>
+                <button onclick="${b.ctaAction}" class="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-xl bg-white hover:bg-amber-300 text-slate-900 text-xs font-extrabold shadow-md transition active:scale-95">
+                  <span>${b.ctaText}</span>
+                  <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- 3. KOLOM KANAN: Visual Emblem Utama Pelayanan -->
+            <div class="hidden sm:flex lg:col-span-3 items-center justify-center">
+              <div class="relative w-36 h-36 lg:w-48 lg:h-48 rounded-[32px] bg-white/95 p-3 shadow-2xl border-4 border-white/80 flex flex-col items-center justify-center">
+                <img src="${b.mainImage}" alt="${b.headlineMain}" class="w-24 h-24 lg:w-32 lg:h-32 rounded-full object-contain logo-crisp" />
+                <span class="mt-2 px-3 py-0.5 rounded-full gemini-gradient-bg text-white text-[10px] font-extrabold uppercase tracking-wider shadow-2xs">
+                  Puskesmas Wori
+                </span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      `;
+
+      // Render Titik Bulat (Circular Dots) di Bagian Bawah Tengah Banner
+      dotsContainer.innerHTML = heroBannersData.map((_, idx) => {
+        const isActive = idx === currentHeroBannerIndex;
+        return `
+          <button
+            onclick="goToHeroBanner(${idx})"
+            aria-label="Pilih Slide Informasi ${idx + 1}"
+            class="w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full transition-all duration-300 focus:outline-none ${
+              isActive
+                ? 'bg-white scale-125 shadow-[0_0_10px_rgba(255,255,255,0.9)] ring-2 ring-white/50'
+                : 'bg-white/45 hover:bg-white/80'
+            }">
+          </button>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function goToHeroBanner(index) {
+      if (index === currentHeroBannerIndex) return;
+      const dir = index > currentHeroBannerIndex ? 'right' : 'left';
+      currentHeroBannerIndex = index;
+      renderHeroBanner(dir);
+    }
+
+    function nextHeroBanner() {
+      if (currentHeroBannerIndex >= heroBannersData.length - 1) return;
+      currentHeroBannerIndex++;
+      renderHeroBanner('right');
+    }
+
+    function prevHeroBanner() {
+      if (currentHeroBannerIndex <= 0) return;
+      currentHeroBannerIndex--;
+      renderHeroBanner('left');
+    }
+
+    function startHeroBannerAutoPlay() {
+      stopHeroBannerAutoPlay();
+      heroBannerTimer = setInterval(() => {
+        if (currentSection !== 'beranda') return;
+        if (currentHeroBannerIndex < heroBannersData.length - 1) {
+          currentHeroBannerIndex++;
+        } else {
+          currentHeroBannerIndex = 0;
+        }
+        renderHeroBanner('right');
+      }, 6000);
+    }
+
+    function stopHeroBannerAutoPlay() {
+      if (heroBannerTimer) {
+        clearInterval(heroBannerTimer);
+        heroBannerTimer = null;
+      }
+    }
+
+    function pauseHeroBanner() {
+      stopHeroBannerAutoPlay();
+    }
+
+    function resumeHeroBanner() {
+      startHeroBannerAutoPlay();
+    }
+
     // Initialize default views on load
     document.addEventListener('DOMContentLoaded', () => {
       const savedTheme = localStorage.getItem('pkm_wori_theme');
       applyTheme(savedTheme === 'dark');
+      renderHeroBanner('right');
+      startHeroBannerAutoPlay();
       lucide.createIcons();
       switchPage('beranda');
     });
